@@ -194,15 +194,48 @@ const translations = {
   }
 };
 
-document.getElementById("lang-switcher").addEventListener("change", (e) => {
-  const lang = e.target.value;
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    if (translations[lang] && translations[lang][key]) {
-      el.textContent = translations[lang][key];
+// document.getElementById("lang-switcher").addEventListener("change", (e) => {
+//   const lang = e.target.value;
+//   document.querySelectorAll("[data-i18n]").forEach(el => {
+//     const key = el.getAttribute("data-i18n");
+//     if (translations[lang] && translations[lang][key]) {
+//       el.textContent = translations[lang][key];
+//     }
+//   });
+// });
+
+function updateLanguage(lang) {
+  // Mettre à jour la langue de l'élément html
+  document.documentElement.lang = lang;
+  
+  // Récupérer tous les éléments avec un attribut data-i18n
+  const elements = document.querySelectorAll('[data-i18n]');
+  
+  elements.forEach(element => {
+    const keys = element.getAttribute('data-i18n').split('.');
+    let translation = translations[lang];
+    
+    keys.forEach(key => {
+      translation = translation[key];
+    });
+    
+    if (translation) {
+      if (element.tagName === 'IMG') {
+        element.alt = translation;
+      } else {
+        element.innerHTML = translation;
+      }
     }
   });
+}
+
+// Écouter le changement de langue
+document.getElementById('lang-switcher').addEventListener('change', (e) => {
+  updateLanguage(e.target.value);
 });
+
+// Initialiser avec la langue par défaut
+updateLanguage('fr');
 
 // Section loader animation with name wobble
 // const observer = new IntersectionObserver((entries) => {
