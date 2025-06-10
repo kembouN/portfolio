@@ -13,11 +13,17 @@
       <h1 class="logo">KEMBOU NIMPA</h1>
       <nav>
         <ul class="nav-links">
-          <li><a href="#about">À propos</a></li>
-          <li><a href="#skills">Compétences</a></li>
-          <li><a href="#projects">Projets</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><button id="toggle-theme">🌓</button></li>
+          <li><a href="#about" data-i18n="nav.about">À propos</a></li>
+          <li><a href="#skills" data-i18n="nav.skills">Compétences</a></li>
+          <li><a href="#projects" data-i18n="nav.projects">Projets</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+          <li>
+            <select id="lang-switcher">
+              <option value="fr">FR</option>
+              <option value="en">EN</option>
+            </select>
+          </li>
+          <li><button id="toggle-theme" >🌓</button></li>
         </ul>
       </nav>
     </div>
@@ -27,29 +33,30 @@
     <section class="intro">
       <div class="intro-content">
         <div class="intro-text">
-          <h2>Développeur Backend Spring Boot / Laravel</h2>
-          <p>Concepteur de solutions web robustes, développeur REST API, passionné par la qualité logicielle.</p>
-          <a href="cv_kembou_nimpa.pdf" class="btn" download>Télécharger mon CV</a>
+          <h2 data-i18n="intro.title">Développeur Backend Spring Boot / Laravel</h2>
+          <p data-i18n="intro.desc">Concepteur de solutions web robustes, développeur REST API, passionné par la qualité logicielle.</p>
+          <a href="assets/cv_kembou_nimpa.pdf" class="btn" download data-i18n="intro.download">Télécharger mon CV</a>
         </div>
         <div class="intro-photo">
-          <img src="assets/images/photo_pro.jpg" alt="Photo de KEMBOU NIMPA" />
+          <img src="assets/images/profil_portfolio.jpg" alt="profil" />
         </div>
       </div>
     </section>
 
     <section id="about" class="section">
-      <h3>À propos</h3>
+      <h3 data-i18n="nav.about">À propos</h3>
       <p>Développeur web spécialisé dans le backend, je conçois et développe des APIs performantes et sécurisées avec Java Spring Boot et Laravel. J’ai aussi une bonne maîtrise d’Angular 19 pour le frontend et je m’intéresse à l’optimisation DevOps (Docker, GitLab CI/CD).</p>
     </section>
 
     <section id="skills" class="section">
-      <h3>Compétences</h3>
+      <h3 data-i18n="nav.skills">Compétences</h3>
       <ul class="skills">
         <li><strong>Langages</strong><br/>Java, PHP, TypeScript, HTML5, CSS3</li>
         <li><strong>Frameworks</strong><br/>Spring Boot, Laravel, Angular 19</li>
         <li><strong>Bases de données</strong><br/>MySQL, PostgreSQL</li>
         <li><strong>Outils</strong><br/>Docker, Git, GitHub, GitLab, Jira, Postman, Swagger</li>
         <li><strong>Collaboration</strong><br/>Teams, Slack, Confluence, Trello, SharePoint</li>
+        <li><strong>Personnelles</strong><br/>Adaptabilité, pensée d'analyse, communication</li>
       </ul>
     </section>
 
