@@ -1,97 +1,188 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="title">KEMBOU NIMPA — Portfolio</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <script defer src="js/script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kembou Nimpa Karlson - Développeur Backend</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
 </head>
 <body>
-  <header class="header">
-    <div class="container">
-      <h1 class="logo" data-i18n="name">KEMBOU NIMPA</h1>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#about" data-i18n="nav.about">À propos</a></li>
-          <li><a href="#skills" data-i18n="nav.skills">Compétences</a></li>
-          <li><a href="#projects" data-i18n="nav.projects">Projets</a></li>
-          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-          <li>
-            <select id="lang-switcher">
-              <option value="fr">FR</option>
-              <option value="en">EN</option>
-            </select>
-          </li>
-          <li><button id="toggle-theme">🌓</button></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <header class="header">
+        <div class="container">
+            <div class="logo animate__animated animate__fadeInLeft">
+                <span>KNK</span>
+            </div>
+            <nav class="nav animate__animated animate__fadeInRight">
+                <ul>
+                    <li><a href="#about" class="about">À propos</a></li>
+                    <li><a href="#skills" class="skill">Compétences</a></li>
+                    <li><a href="#experience" class="expe">Expérience</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="fr">FR</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+        </div>
+    </header>
 
-  <main class="container">
-    <section class="intro">
-      <div class="intro-content">
-        <div class="intro-text">
-          <h2 data-i18n="intro.title">Développeur Backend Spring Boot / Laravel</h2>
-          <p data-i18n="intro.desc">Concepteur de solutions web robustes, développeur REST API, passionné par la qualité logicielle.</p>
-          <a href="assets/cv_kembou_nimpa.pdf" class="btn" download data-i18n="intro.download">Télécharger mon CV</a>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="animate__animated animate__fadeInDown">Kembou Nimpa Karlson</h1>
+                <h2 class="animate__animated animate__fadeInDown animate__delay-1s">Développeur Web Backend</h2>
+                <p class="animate__animated animate__fadeIn animate__delay-2s">Spécialisé en Spring Boot, Laravel et développement d'APIs REST</p>
+                <a href="#contact" class="btn animate__animated animate__fadeInUp animate__delay-3s">Me contacter</a>
+                <a href="asset/cv_kembou_nimpa.pdf" class=" btn animate__animated animate__fadeInUp animate__delay-3s download-cv" download data-i18n="intro.download">Télécharger mon CV</a>
+
+            </div>
+            <div class="hero-image animate__animated animate__fadeInRight animate__delay-1s">
+                <div class="image-wrapper">
+                    <img src="./assets/images/profil_portfolio.jpg" alt="Kembou Nimpa Karlson">
+                </div>
+            </div>
         </div>
-        <div class="intro-photo">
-          <img src="assets/images/profil_portfolio.jpg" alt="profil" data-i18n="intro.alt" />
-        </div>
-      </div>
     </section>
 
-    <section id="about" class="section">
-      <h3 data-i18n="nav.about">À propos</h3>
-      <p data-i18n="about.content">Développeur web spécialisé dans le backend, je conçois et développe des APIs performantes et sécurisées avec Java Spring Boot et Laravel. J'ai aussi une bonne maîtrise d'Angular 19 pour le frontend et je m'intéresse à l'optimisation DevOps (Docker, GitLab CI/CD).</p>
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">À propos</h2>
+            <div class="about-content">
+                <div class="about-text animate__animated animate__fadeInLeft">
+                    <p class="biography">Étudiant en Master Data Science et titulaire d'une Licence de technologie en ingénierie logicielle, je suis concepteur de solutions web robustes, développeur REST API, passionné par la qualité logicielle.</p>
+                    <div class="personal-info">
+                        <p><i class="fas fa-birthday-cake"></i> <strong class="birthday">Date de naissance </strong>: 03/06/2002</p>
+                        <p><i class="fas fa-map-marker-alt"></i> <strong>Localisation: </strong> Douala, Cameroun</p>
+                        <p><i class="fas fa-envelope"></i> <strong>Email: </strong> karlsonkit87@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> <strong class="tel">Téléphone </strong>: +237 693 745 998 / 671 340 629</p>
+                    </div>
+                </div>
+                <div class="about-languages animate__animated animate__fadeInRight">
+                    <h3>Langues</h3>
+                    <div class="language-bar">
+                        <div class="language">
+                            <span class="french">Français</span>
+                            <div class="progress">
+                                <div class="progress-fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="language">
+                            <span class="english">Anglais</span>
+                            <div class="progress">
+                                <div class="progress-fill" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                        <div class="language">
+                            <span class="ngom">Ngombale</span>
+                            <div class="progress">
+                                <div class="progress-fill" style="width: 97%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="skills" class="section">
-      <h3 data-i18n="nav.skills">Compétences</h3>
-      <ul class="skills">
-        <li data-i18n="skills.languages"><strong>Langages</strong><br/>Java, PHP, TypeScript, HTML5, CSS3</li>
-        <li data-i18n="skills.frameworks"><strong>Frameworks</strong><br/>Spring Boot, Laravel, Angular 19</li>
-        <li data-i18n="skills.databases"><strong>Bases de données</strong><br/>MySQL, PostgreSQL</li>
-        <li data-i18n="skills.tools"><strong>Outils</strong><br/>Docker, Git, GitHub, GitLab, Jira, Postman, Swagger</li>
-        <li data-i18n="skills.collaboration"><strong>Collaboration</strong><br/>Teams, Slack, Confluence, Trello, SharePoint</li>
-        <li data-i18n="skills.personal"><strong>Personnelles</strong><br/>Adaptabilité, pensée d'analyse, communication</li>
-      </ul>
+    <section id="skills" class="section skills">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">Compétences Techniques</h2>
+            <div class="skills-grid">
+                <!-- Les compétences seront générées par JavaScript -->
+            </div>
+        </div>
     </section>
 
-    <section id="projects" class="section">
-      <h3 data-i18n="nav.projects">Projets</h3>
-      <div class="projects-grid">
-        <div class="project">
-          <h4 data-i18n="projects.copilothrm.title">CopilotHRM</h4>
-          <p data-i18n="projects.copilothrm.desc">Application RH développée avec Spring Boot 3 pour <strong>Abyster Consulting</strong>, gestion des utilisateurs, rôles, contrat de travail.</p>
+    <section id="experience" class="section experience">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">Expérience Professionnelle</h2>
+            <div class="timeline">
+                <div class="timeline-item animate__animated animate__fadeInLeft">
+                    <div class="timeline-date">Juil 2023 - Oct 2024</div>
+                    <div class="timeline-content">
+                        <h3>Abyster Consulting</h3>
+                        <h4>Développeur Backend</h4>
+                        <ul>
+                            <li class="copilot">CopilotHRM: Analyse du système, mise en place de la base de données et implémentation des APIs REST avec Spring Boot 3</li>
+                            <li class="teleconsult">Téléconsultation: APIs REST pour application de consultation à distance avec Laravel 9</li>
+                            <li class="magnolia">Magnolia: APIs REST pour application de gestion des hôpitaux avec Laravel 9</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item animate__animated animate__fadeInRight">
+                    <div class="timeline-date">Oct 2024 - Fév 2025</div>
+                    <div class="timeline-content">
+                        <h3>JobFinder</h3>
+                        <h4 class="projet-perso">Projet Personnel</h4>
+                        <p class="projet-perso-descr">Application web de recherche de travail utilisant Spring Boot 3 et Angular 19</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate__animated animate__fadeInLeft">
+                    <div class="timeline-date">Mar 2025 - Présent</div>
+                    <div class="timeline-content">
+                        <h3>Synthexis Sarl</h3>
+                        <h4 class="syn-role">Développeur Web</h4>
+                        <ul>
+                            <li class="jtm">Développement et déploiement d'un site web utilisant Laravel 10</li>
+                            <li class="mbc">Développement d'une application de gestion avec Spring boot 3 et Angular 19</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="project">
-          <h4 data-i18n="projects.jobfinder.title">JobFinder</h4>
-          <p data-i18n="projects.jobfinder.desc">Application de recherche d'emploi fullstack (Angular 19 + Spring Boot), projet personnel.</p>
-        </div>
-        <div class="project">
-          <h4 data-i18n="projects.magnolia.title">Magnolia</h4>
-          <p data-i18n="projects.magnolia.desc">Application de gestion d'un laboratoire d'analyse biomédicale avec Laravel 9 pour <strong>Abyster Consulting</strong>.</p>
-        </div>
-        <div class="project">
-          <h4 data-i18n="projects.teleconsultation.title">Téléconsultation</h4>
-          <p data-i18n="projects.teleconsultation.desc">Application de consultation médicale en ligne et gestion des rendez-vous avec Laravel 9 pour <strong>Abyster Consulting</strong>.</p>
-        </div>
-      </div>
     </section>
 
-    <section id="contact" class="section">
-      <h3 data-i18n="nav.contact">Contact</h3>
-      <p data-i18n="contact.email">Email : <a href="mailto:karlsonkit87@gmail.com">karlsonkit87@gmail.com</a></p>
-      <p data-i18n="contact.github">GitHub : <a href="https://github.com/kembouN" target="_blank">https://github.com/kembouN</a></p>
-      <p data-i18n="contact.linkedin">LinkedIn : <a href="https://www.linkedin.com/in/karlson-kembou-2b1501328/" target="_blank">https://www.linkedin.com/in/karlson-kembou-2b1501328/</a></p>
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeIn">Contact</h2>
+            <div class="contact-content">
+                <div class="contact-info animate__animated animate__fadeInLeft">
+                    <h3>Restons en contact</h3>
+                    <p class="contact-text">N'hésitez pas à me contacter pour des opportunités ou collaborations.</p>
+                    <div class="contact-details">
+                        <p><i class="fas fa-envelope"></i> karlsonkit87@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> +237 693 745 998</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Douala, <span class="country">Cameroun</span></p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/karlson-kembou-2b1501328/" title="linkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/kembouN" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://wa.me/237693745998" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="mailto:karlsonkit87@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form animate__animated animate__fadeInRight">
+                    <div class="form-group">
+                        <input type="text" placeholder="Name*" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email*" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject*">
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
     </section>
-  </main>
 
-  <footer class="footer">
-    <p data-i18n="footer.copyright">&copy; 2024 KEMBOU NIMPA. Tous droits réservés.</p>
-  </footer>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Kembou Nimpa Karlson. <span class="droits">Tous droits réservés</span>.</p>
+        </div>
+    </footer>
+
+    <script src="./js/script.js"></script>
 </body>
 </html>
