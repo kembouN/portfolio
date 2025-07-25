@@ -1,21 +1,222 @@
-// Theme toggle script
-const toggleBtn = document.getElementById("toggle-theme");
-const html = document.documentElement;
+document.addEventListener("DOMContentLoaded", function () {
+  setupLanguageSwitcher();
+  displaySkills();
 
-function toggleTheme() {
-  const current = html.getAttribute("data-theme");
-  const next = current === "dark" ? "light" : "dark";
-  html.setAttribute("data-theme", next);
-  localStorage.setItem("theme", next);
-}
+  // Animation au scroll
+  const animateOnScroll = function () {
+    const elements = document.querySelectorAll(".animate__animated");
 
-if (toggleBtn) {
-  toggleBtn.addEventListener("click", toggleTheme);
-}
+    elements.forEach((element) => {
+      const elementPosition = element.getBoundingClientRect().top;
+      const screenPosition = window.innerHeight / 1.3;
 
-const storedTheme = localStorage.getItem("theme");
-if (storedTheme) {
-  html.setAttribute("data-theme", storedTheme);
+      if (elementPosition < screenPosition) {
+        const animationClass = element.classList[1];
+        element.classList.add(animationClass);
+      }
+    });
+  };
+
+  window.addEventListener("scroll", animateOnScroll);
+  animateOnScroll(); // Exécuter une fois au chargement
+
+  // Header scroll effect
+  const header = document.querySelector(".header");
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 100) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  });
+
+  // Menu mobile
+  const mobileMenuBtn = document.querySelector(".mobile-menu");
+  const nav = document.querySelector(".nav");
+
+  mobileMenuBtn.addEventListener("click", function () {
+    nav.classList.toggle("active");
+  });
+
+  // Smooth scrolling
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const targetId = this.getAttribute("href");
+      const targetElement = document.querySelector(targetId);
+
+      window.scrollTo({
+        top: targetElement.offsetTop - 80,
+        behavior: "smooth",
+      });
+
+      // Fermer le menu mobile si ouvert
+      nav.classList.remove("active");
+    });
+  });
+
+  // Animation des barres de progression
+  const animateProgressBars = function () {
+    const progressBars = document.querySelectorAll(".progress-fill");
+
+    progressBars.forEach((bar) => {
+      const width = bar.style.width;
+      bar.style.width = "0";
+
+      setTimeout(() => {
+        bar.style.width = width;
+      }, 100);
+    });
+  };
+
+  // Observer pour déclencher l'animation des barres de progression
+  const aboutSection = document.querySelector(".about");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateProgressBars();
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  observer.observe(aboutSection);
+
+  // Formulaire de contact
+  const contactForm = document.querySelector(".contact-form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Ici vous pouvez ajouter le code pour envoyer le formulaire
+      alert("Message envoyé! Je vous répondrai dès que possible.");
+      this.reset();
+    });
+  }
+});
+
+function displaySkills() {
+  const skillsGrid = document.querySelector(".skills-grid");
+
+  if (!skillsGrid) return;
+
+  // Toutes vos compétences organisées
+  const skillsData = {
+    "Langages & Frameworks": [
+      { name: "Java", icon: "fab fa-java", level: 80 },
+      { name: "Spring Boot", icon: "fas fa-leaf", level: 80 },
+      { name: "PHP", icon: "fab fa-php", level: 85 },
+      { name: "Laravel", icon: "fab fa-laravel", level: 85 },
+      { name: "TypeScript", icon: "fab fa-js", level: 70 },
+      { name: "Angular", icon: "fab fa-angular", level: 60 },
+      { name: "HTML5", icon: "fab fa-html5", level: 90 },
+      { name: "CSS3", icon: "fab fa-css3-alt", level: 80 },
+    ],
+    "Bases de Données": [
+      { name: "MySQL", icon: "fas fa-database", level: 80 },
+      { name: "PostgreSQL", icon: "fas fa-database", level: 70 },
+      { name: "PgAdmin", icon: "fas fa-database", level: 70 },
+    ],
+    "Outils & Logiciels": [
+      { name: "GitHub", icon: "fab fa-github", level: 85 },
+      { name: "GitLab", icon: "fab fa-gitlab", level: 80 },
+      { name: "Bitbucket", icon: "fab fa-bitbucket", level: 80 },
+      { name: "JIRA", icon: "fab fa-jira", level: 75 },
+      { name: "Trello", icon: "fab fa-trello", level: 85 },
+      { name: "Maven", icon: "fas fa-code", level: 70 },
+      { name: "Postman", icon: "fas fa-wifi", level: 85 },
+      { name: "Swagger", icon: "fas fa-file-code", level: 85 },
+      { name: "MS Office", icon: "fas fa-file-word", level: 85 },
+      { name: "Docker", icon: "fab fa-docker", level: 60 },
+    ],
+    Modélisation: [
+      { name: "UML", icon: "fas fa-project-diagram", level: 85 },
+      { name: "PowerAMC", icon: "fas fa-cube", level: 80 },
+    ],
+    "Soft Skills": [
+      { name: "Communication", icon: "fas fa-comments", level: 90 },
+      { name: "Travail d'équipe / Team work", icon: "fas fa-users", level: 95 },
+      {
+        name: "Résolution de problèmes / Problem solving",
+        icon: "fas fa-lightbulb",
+        level: 90,
+      },
+      {
+        name: "Adaptabilité / Adaptability",
+        icon: "fas fa-sync-alt",
+        level: 80,
+      },
+    ],
+  };
+
+  // Affichage des compétences
+  for (const category in skillsData) {
+    const currentLang = localStorage.getItem("portfolio-lang") || "fr";
+    // Titre de catégorie
+    const categoryTitle = document.createElement("h3");
+    categoryTitle.className = "skills-category-title";
+    switch (category) {
+      case "Langages & Frameworks":
+        categoryTitle.textContent =
+          currentLang === "fr"
+            ? "Langages & Frameworks"
+            : "Languages & Frameworks";
+        break;
+      case "Bases de Données":
+        categoryTitle.textContent =
+          currentLang === "fr" ? "Bases de données" : "DataBases";
+        break;
+      case "Outils & Logiciels":
+        categoryTitle.textContent =
+          currentLang === "fr" ? "Outils & Logiciels" : "Tools and Softwares";
+        break;
+      case "Modélisation":
+        categoryTitle.textContent =
+          currentLang === "fr" ? "Modélisation" : "Modeling";
+        break;
+      case "Soft Skills":
+        categoryTitle.textContent = "Soft Skills";
+        break;
+      default:
+        break;
+    }
+    // categoryTitle.textContent = category;
+    const categoryGroupe = document.createElement("div");
+    categoryGroupe.className =
+      "skills-category-group animate__animated animate__fadeIn";
+    categoryGroupe.appendChild(categoryTitle);
+    const skillCardGroup = document.createElement("div");
+    skillCardGroup.className = "skills-card-group";
+    // skillCardGroup.appendChild(categoryGroupe);
+
+    // Compétences
+    skillsData[category].forEach((skill, index) => {
+      const skillCard = document.createElement("div");
+      skillCard.className = "skill-card animate__animated animate__fadeIn";
+
+      skillCard.innerHTML = `
+                <div class="skill-icon">
+                    <i class="${skill.icon}"></i>
+                </div>
+                <h3>${skill.name}</h3>
+                <div class="skill-level">
+                    <div class="level-bar" style="width: ${skill.level}%"></div>
+                    <span>${skill.level}%</span>
+                </div>
+            `;
+
+      // Délai d'animation progressif
+      skillCard.style.animationDelay = `${index * 0.1}s`;
+
+      skillCardGroup.appendChild(skillCard);
+    });
+    categoryGroupe.appendChild(skillCardGroup);
+    skillsGrid.appendChild(categoryGroupe);
+  }
 }
 
 // Scroll progress bar
@@ -30,233 +231,239 @@ window.addEventListener("scroll", () => {
   scrollBar.style.width = scrollPercent + "%";
 });
 
-// Effet de trace de curseur
-// window.addEventListener("mousemove", (e) => {
-//   const dot = document.createElement("div");
-//   dot.className = "cursor-line";
+// Mode Sombre
+const themeToggle = document.createElement("button");
+themeToggle.className = "theme-toggle";
+themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+document.body.appendChild(themeToggle);
 
-//   // Position
-//   dot.style.left = `${e.pageX}px`;
-//   dot.style.top = `${e.pageY}px`;
+themeToggle.addEventListener("click", function () {
+  document.body.classList.toggle("dark-mode");
 
-//   // Couleur aléatoire à chaque mouvement
-//   const hue = Math.floor(Math.random() * 360);
-//   dot.style.backgroundColor = `hsl(${hue}, 100%, 60%)`;
-
-//   document.body.appendChild(dot);
-
-//   // Disparaît automatiquement
-//   setTimeout(() => {
-//     dot.remove();
-//   }, 800);
-// });
-
-window.addEventListener("mousemove", (e) => {
-  const trail = document.createElement("div");
-  trail.className = "cursor-trail";
-  trail.style.left = `${e.pageX}px`;
-  trail.style.top = `${e.pageY}px`;
-  document.body.appendChild(trail);
-
-  setTimeout(() => {
-    trail.remove();
-  }, 5000);
+  if (document.body.classList.contains("dark-mode")) {
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    localStorage.setItem("theme", "dark");
+  } else {
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    localStorage.setItem("theme", "light");
+  }
 });
 
-// MISE EN PLACE DE LA TRADUCTION
-// const translations = {
-//   fr: {
-//     "nav.about": "À propos",
-//     "nav.skills": "Compétences",
-//     "nav.projects": "Projets",
-//     "nav.contact": "Contact",
-//     "intro.title": "Développeur Backend Spring Boot / Laravel",
-//     "intro.desc": "Concepteur de solutions web robustes...",
-//     "intro.download": "Télécharger mon CV"
-//   },
-//   en: {
-//     "nav.about": "About",
-//     "nav.skills": "Skills",
-//     "nav.projects": "Projects",
-//     "nav.contact": "Contact",
-//     "intro.title": "Backend Developer Spring Boot / Laravel",
-//     "intro.desc": "Builder of robust web solutions, REST API developer, ",
-//     "intro.download": "Download my CV"
-//   }
-// };
+// Vérifier le thème au chargement
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark-mode");
+  themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+}
 
-const translations = {
-  fr: {
-    "title": "KEMBOU NIMPA — Portfolio",
-    "name": "KEMBOU NIMPA",
-    "nav": {
-      "about": "À propos",
-      "skills": "Compétences",
-      "projects": "Projets",
-      "contact": "Contact"
+// Gestion du changement de langue
+function setupLanguageSwitcher() {
+  const langBtns = document.querySelectorAll(".lang-btn");
+  const currentLang = localStorage.getItem("portfolio-lang") || "fr";
+
+  // Activer la langue courante
+  document.documentElement.lang = currentLang;
+  document
+    .querySelector(`.lang-btn[data-lang="${currentLang}"]`)
+    .classList.add("active");
+
+  // Traductions
+  const translations = {
+    fr: {
+      "hero-title": "Kembou Nimpa Karlson",
+      "hero-subtitle": "Développeur Web Backend",
+      "hero-text":
+        "Spécialisé en Spring Boot, Laravel et développement d'APIs REST",
+      "contact-btn": "Me contacter",
+      "download-cv": "Télecharger mon CV",
+      "about-title": "À propos",
+      "about-text":
+        "Étudiant en Master Data Science et titulaire d'une Licence de technologie en ingénierie logicielle, je suis concepteur de solutions web robustes, développeur REST API, passionné par la qualité logicielle.",
+      "about-date": "Date de naissance",
+      "about-phone": "Téléphone",
+      "about-langue": "Langues",
+      "langue-francais": "Français",
+      "langue-anglais": "Anglais",
+
+      skills: "Compétences",
+
+      experience: "Expérience",
+      "experience-pro": "Expérience Professionnelle",
+
+      "experience.abyster.title": "Abyster Consulting",
+      "experience.abyster.role": "Développeur Backend",
+      "experience.abyster.project1":
+        "CopilotHRM: Analyse du système, mise en place de la base de données et implémentation des APIs REST avec Spring Boot 3",
+      "experience.abyster.project2":
+        "Téléconsultation: APIs REST pour application de consultation à distance avec Laravel 9",
+      "experience.abyster.project3":
+        "Magnolia: APIs REST pour application de gestion des hôpitaux avec Laravel 9",
+      "experience.jobfinder.title": "JobFinder",
+      "experience.jobfinder.role": "Projet Personnel",
+      "experience.jobfinder.description":
+        "Application web de recherche de travail utilisant Spring Boot 3 et Angular 19",
+      "experience.synthexis.title": "Synthexis Sarl",
+      "experience.synthexis.role": "Développeur Web",
+      "experience.synthexis.project1":
+        "Développement et déploiement d'un site web utilisant Laravel 10",
+      "experience.synthexis.project2":
+        "Développement d'une application de gestion avec Spring boot 3 et Angular 19",
+
+      "contact.stay": "Restons en contact",
+      "contact.desc":
+        "N'hésitez pas à me contacter pour des opportunités ou collaborations.",
+      "contact.send-message": "Envoyez le message",
+      droits: "Tous droits réservés",
+
+      country: "Cameroun",
+      // Ajoutez toutes les autres traductions nécessaires
     },
-    "intro": {
-      "title": "Développeur Backend Spring Boot / Laravel",
-      "desc": "Concepteur de solutions web robustes, développeur REST API, passionné par la qualité logicielle.",
-      "download": "Télécharger mon CV",
-      "alt": "Photo de profil"
+    en: {
+      "hero-title": "Kembou Nimpa Karlson",
+      "hero-subtitle": "Backend Web Developer",
+      "hero-text":
+        "Specialized in Spring Boot, Laravel and REST APIs development",
+      "contact-btn": "Contact me",
+      "download-cv": "Download my CV",
+      "about-title": "About",
+      "about-text": "",
+      "about-date": "Birth date",
+      "about-phone": "Phone",
+      "about-langue": "Languages",
+      "langue-francais": "French",
+      "langue-anglais": "English",
+
+      skills: "Skills",
+      "technical-skills": "Compétences Techniques",
+
+      // Ajoutez toutes les autres traductions nécessaires
+      experience: "Experience",
+      "experience-pro": "Professionnal Experience",
+      "experience.abyster.title": "Abyster Consulting",
+      "experience.abyster.role": "Backend Developer",
+      "experience.abyster.project1":
+        "CopilotHRM: System analysis, database setup and REST APIs implementation with Spring Boot 3",
+      "experience.abyster.project2":
+        "Teleconsultation: REST APIs for remote consultation application using Laravel 9",
+      "experience.abyster.project3":
+        "Magnolia: REST APIs for hospital management application using Laravel 9",
+      "experience.jobfinder.title": "JobFinder",
+      "experience.jobfinder.role": "Personal Project",
+      "experience.jobfinder.description":
+        "Job search web application using Spring Boot 3 and Angular 19",
+      "experience.synthexis.title": "Synthexis Sarl",
+      "experience.synthexis.role": "Web Developer",
+      "experience.synthexis.project1":
+        "Development and deployment of a website using Laravel 10",
+      "experience.synthexis.project2":
+        "Development of a management application with Spring Boot 3 and Angular 19",
+
+      "contact.stay": "Let's stay in touch",
+      "contact.desc":
+        "Do not hesitate to contact me for opportunities or collaborations",
+      "contact.send-message": "Send message",
+      droits: "All rights reserved",
+
+      country: "Cameroon",
     },
-    "about": {
-      "content": "Développeur web spécialisé dans le backend, je conçois et développe des APIs performantes et sécurisées avec Java Spring Boot et Laravel. J'ai aussi une bonne maîtrise d'Angular 19 pour le frontend et je m'intéresse à l'optimisation DevOps (Docker, GitLab CI/CD)."
-    },
-    "skills": {
-      "languages": "<strong>Langages</strong><br/>Java, PHP, TypeScript, HTML5, CSS3",
-      "frameworks": "<strong>Frameworks</strong><br/>Spring Boot, Laravel, Angular 19",
-      "databases": "<strong>Bases de données</strong><br/>MySQL, PostgreSQL",
-      "tools": "<strong>Outils</strong><br/>Docker, Git, GitHub, GitLab, Jira, Postman, Swagger",
-      "collaboration": "<strong>Collaboration</strong><br/>Teams, Slack, Confluence, Trello, SharePoint",
-      "personal": "<strong>Personnelles</strong><br/>Adaptabilité, pensée d'analyse, communication"
-    },
-    "projects": {
-      "copilothrm": {
-        "title": "CopilotHRM",
-        "desc": "Application RH développée avec Spring Boot 3 pour <strong>Abyster Consulting</strong>, gestion des utilisateurs, rôles, contrat de travail."
-      },
-      "jobfinder": {
-        "title": "JobFinder",
-        "desc": "Application de recherche d'emploi fullstack (Angular 19 + Spring Boot), projet personnel."
-      },
-      "magnolia": {
-        "title": "Magnolia",
-        "desc": "Application de gestion d'un laboratoire d'analyse biomédicale avec Laravel 9 pour <strong>Abyster Consulting</strong>."
-      },
-      "teleconsultation": {
-        "title": "Téléconsultation",
-        "desc": "Application de consultation médicale en ligne et gestion des rendez-vous avec Laravel 9 pour <strong>Abyster Consulting</strong>."
-      }
-    },
-    "contact": {
-      "email": "Email : <a href=\"mailto:karlsonkit87@gmail.com\">karlsonkit87@gmail.com</a>",
-      "github": "GitHub : <a href=\"https://github.com/kembouN\" target=\"_blank\">https://github.com/kembouN</a>",
-      "linkedin": "LinkedIn : <a href=\"https://www.linkedin.com/in/karlson-kembou-2b1501328/\" target=\"_blank\">https://www.linkedin.com/in/karlson-kembou-2b1501328/</a>"
-    },
-    "footer": {
-      "copyright": "&copy; 2024 KEMBOU NIMPA. Tous droits réservés."
-    }
-  },
-  en: {
-    "title": "KEMBOU NIMPA — Portfolio",
-    "name": "KEMBOU NIMPA",
-    "nav": {
-      "about": "About",
-      "skills": "Skills",
-      "projects": "Projects",
-      "contact": "Contact"
-    },
-    "intro": {
-      "title": "Spring Boot / Laravel Backend Developer",
-      "desc": "Designer of robust web solutions, REST API developer, passionate about software quality.",
-      "download": "Download my CV",
-      "alt": "Profile picture"
-    },
-    "about": {
-      "content": "Web developer specialized in backend, I design and develop performant and secure APIs with Java Spring Boot and Laravel. I also have good mastery of Angular 19 for frontend and I'm interested in DevOps optimization (Docker, GitLab CI/CD)."
-    },
-    "skills": {
-      "languages": "<strong>Languages</strong><br/>Java, PHP, TypeScript, HTML5, CSS3",
-      "frameworks": "<strong>Frameworks</strong><br/>Spring Boot, Laravel, Angular 19",
-      "databases": "<strong>Databases</strong><br/>MySQL, PostgreSQL",
-      "tools": "<strong>Tools</strong><br/>Docker, Git, GitHub, GitLab, Jira, Postman, Swagger",
-      "collaboration": "<strong>Collaboration</strong><br/>Teams, Slack, Confluence, Trello, SharePoint",
-      "personal": "<strong>Personal</strong><br/>Adaptability, analytical thinking, communication"
-    },
-    "projects": {
-      "copilothrm": {
-        "title": "CopilotHRM",
-        "desc": "HR application developed with Spring Boot 3 for <strong>Abyster Consulting</strong>, user management, roles, work contracts."
-      },
-      "jobfinder": {
-        "title": "JobFinder",
-        "desc": "Fullstack job search application (Angular 19 + Spring Boot), personal project."
-      },
-      "magnolia": {
-        "title": "Magnolia",
-        "desc": "Biomedical analysis laboratory management application with Laravel 9 for <strong>Abyster Consulting</strong>."
-      },
-      "teleconsultation": {
-        "title": "Teleconsultation",
-        "desc": "Online medical consultation application and appointment management with Laravel 9 for <strong>Abyster Consulting</strong>."
-      }
-    },
-    "contact": {
-      "email": "Email : <a href=\"mailto:karlsonkit87@gmail.com\">karlsonkit87@gmail.com</a>",
-      "github": "GitHub : <a href=\"https://github.com/kembouN\" target=\"_blank\">https://github.com/kembouN</a>",
-      "linkedin": "LinkedIn : <a href=\"https://www.linkedin.com/in/karlson-kembou-2b1501328/\" target=\"_blank\">https://www.linkedin.com/in/karlson-kembou-2b1501328/</a>"
-    },
-    "footer": {
-      "copyright": "&copy; 2024 KEMBOU NIMPA. All rights reserved."
-    }
+  };
+
+  // Fonction de traduction
+  function updateContent(lang) {
+    document.documentElement.lang = lang;
+
+    // Exemple pour quelques éléments :
+    document.querySelector(".nav .about").textContent =
+      translations[lang]["about-title"];
+    document.querySelector(".nav .skill").textContent =
+      translations[lang]["skills"];
+    document.querySelector(".nav .expe").textContent =
+      translations[lang]["experience"];
+    document.querySelector(".hero h1").textContent =
+      translations[lang]["hero-title"];
+    document.querySelector(".hero h2").textContent =
+      translations[lang]["hero-subtitle"];
+    document.querySelector(".hero p").textContent =
+      translations[lang]["hero-text"];
+    document.querySelector(".hero .btn").textContent =
+      translations[lang]["contact-btn"];
+    document.querySelector("#about .section-title").textContent =
+      translations[lang]["about-title"];
+    document.querySelector(".biography").textContent =
+      translations[lang]["about-text"];
+    document.querySelector(".birthday").textContent =
+      translations[lang]["about-date"];
+    document.querySelector(".download-cv").textContent =
+      translations[lang]["download-cv"];
+    document.querySelector(".tel").textContent =
+      translations[lang]["about-phone"];
+    document.querySelector(".about-languages h3").textContent =
+      translations[lang]["about-langue"];
+    document.querySelector(".language .french").textContent =
+      translations[lang]["langue-francais"];
+    document.querySelector(".language .english").textContent =
+      translations[lang]["langue-anglais"];
+    document.querySelector(".experience h2").textContent =
+      translations[lang]["experience-pro"];
+    document.querySelector(".timeline-item h4").textContent =
+      translations[lang]["experience.abyster.role"];
+    document.querySelector(".experience .copilot").textContent =
+      translations[lang]["experience.abyster.project1"];
+    document.querySelector(".experience .teleconsult").textContent =
+      translations[lang]["experience.abyster.project2"];
+    document.querySelector(".experience .magnolia").textContent =
+      translations[lang]["experience.abyster.project3"];
+    document.querySelector(".projet-perso").textContent =
+      translations[lang]["experience.jobfinder.role"];
+    document.querySelector(".projet-perso-descr").textContent =
+      translations[lang]["experience.jobfinder.description"];
+    document.querySelector(".syn-role").textContent =
+      translations[lang]["experience.synthexis.role"];
+    document.querySelector(".jtm").textContent =
+      translations[lang]["experience.synthexis.project1"];
+    document.querySelector(".mbc").textContent =
+      translations[lang]["experience.synthexis.project2"];
+    document.querySelector(".contact-info h3").textContent =
+      translations[lang]["contact.stay"];
+    document.querySelector(".contact-text").textContent =
+      translations[lang]["contact.desc"];
+    document.querySelector(".country").textContent =
+      translations[lang]["country"];
+    document.querySelector(".contact-form button").textContent =
+      translations[lang]["contact.send-message"];
+    document.querySelector(".droits").textContent =
+      translations[lang]["droits"];
+
+    // Ajoutez des sélecteurs pour tous les éléments à traduire
   }
-};
 
-// document.getElementById("lang-switcher").addEventListener("change", (e) => {
-//   const lang = e.target.value;
-//   document.querySelectorAll("[data-i18n]").forEach(el => {
-//     const key = el.getAttribute("data-i18n");
-//     if (translations[lang] && translations[lang][key]) {
-//       el.textContent = translations[lang][key];
-//     }
-//   });
-// });
+  // Gestion des clics
+  langBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const lang = btn.dataset.lang;
 
-function updateLanguage(lang) {
-  // Mettre à jour la langue de l'élément html
-  document.documentElement.lang = lang;
-  
-  // Récupérer tous les éléments avec un attribut data-i18n
-  const elements = document.querySelectorAll('[data-i18n]');
-  
-  elements.forEach(element => {
-    const keys = element.getAttribute('data-i18n').split('.');
-    let translation = translations[lang];
-    
-    keys.forEach(key => {
-      translation = translation[key];
+      // Mettre à jour l'interface
+      langBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // Changer le contenu
+      updateContent(lang);
+
+      // Sauvegarder la préférence
+      localStorage.setItem("portfolio-lang", lang);
     });
-    
-    if (translation) {
-      if (element.tagName === 'IMG') {
-        element.alt = translation;
-      } else {
-        element.innerHTML = translation;
-      }
-    }
+  });
+
+  // Charger la langue au démarrage
+  updateContent(currentLang);
+}
+
+function initAutoScroll() {
+  document.querySelectorAll(".skill-card-group").forEach((group) => {
+    group.style.animation = "none";
+    void group.offsetWidth;
+    group.style.animation = "";
   });
 }
 
-// Écouter le changement de langue
-document.getElementById('lang-switcher').addEventListener('change', (e) => {
-  updateLanguage(e.target.value);
-});
-
-// Initialiser avec la langue par défaut
-updateLanguage('fr');
-
-// Section loader animation with name wobble
-// const observer = new IntersectionObserver((entries) => {
-//   entries.forEach(entry => {
-//     if (entry.isIntersecting && !entry.target.classList.contains("loaded")) {
-//       const loader = document.createElement("div");
-//       loader.className = "section-loader";
-//       loader.innerHTML = "<span class='wobble'>K</span><span class='wobble'>E</span><span class='wobble'>M</span><span class='wobble'>B</span><span class='wobble'>O</span><span class='wobble'>U</span> <span class='wobble'>N</span><span class='wobble'>I</span><span class='wobble'>M</span><span class='wobble'>P</span><span class='wobble'>A</span><span class='wobble'>...</span>";
-//       entry.target.prepend(loader);
-
-//       setTimeout(() => {
-//         loader.remove();
-//         entry.target.classList.add("loaded");
-//       }, 2000);
-//     }
-//   });
-// }, {
-//   threshold: 0.1
-// });
-
-// document.querySelectorAll(".section").forEach(section => {
-//   observer.observe(section);
-// });
-
+// Appelez cette fonction au chargement
+document.addEventListener("DOMContentLoaded", setupLanguageSwitcher);
