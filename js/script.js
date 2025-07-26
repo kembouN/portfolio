@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.querySelector(".contact-form");
   if (contactForm) {
     contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
+      // e.preventDefault();
 
       // Ici vous pouvez ajouter le code pour envoyer le formulaire
       alert("Message envoyé! Je vous répondrai dès que possible.");
