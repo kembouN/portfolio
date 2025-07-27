@@ -90,10 +90,35 @@ document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.querySelector(".contact-form");
   if (contactForm) {
     contactForm.addEventListener("submit", function (e) {
-      // e.preventDefault();
-
-      // Ici vous pouvez ajouter le code pour envoyer le formulaire
-      alert("Message envoyé! Je vous répondrai dès que possible.");
+      e.preventDefault();
+      emailjs.init({
+        publicKey: 'Lx7MiIn6-s_kzUb5i',
+        // Do not allow headless browsers
+        blockHeadless: true,
+        
+        limitRate: {
+          // Set the limit rate for the application
+          id: 'portfolio-contact',
+          // Allow 1 request per 10s
+          throttle: 10000,
+        },
+      });
+      const title = document.getElementById("contact-subject").value;
+      const name = document.getElementById("contact-name").value;
+      const message = document.getElementById("contact-msg").value;
+      const email = document.getElementById("contact-email").value;
+      let feedback = document.getElementById("submit-feedback");
+      emailjs.send("service_dwrq7h5","template_mmfxoip",{
+        title: title,
+        name: name,
+        message: message,
+        email: email
+      }).then(function(response) {
+        response.status === 200
+          ? (feedback.textContent = "Message envoyé avec succès!")
+          : (feedback.textContent = "Erreur lors de l'envoi du message.");
+        feedback.style.color = response.status === 200 ? "green" : "red";
+      });
       this.reset();
     });
   }
