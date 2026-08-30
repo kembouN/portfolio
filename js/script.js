@@ -7,15 +7,15 @@ const SKILLS_DATA = {
   "Langages & Frameworks": {
     icon: "fas fa-code",
     items: [
-      { name: "Java",       icon: "fab fa-java",        level: 80 },
-      { name: "Spring Boot",icon: "fas fa-leaf",         level: 80 },
+      { name: "Java",       icon: "fab fa-java",        level: 75 },
+      { name: "Spring Boot",icon: "fas fa-leaf",         level: 75 },
       { name: "PHP",        icon: "fab fa-php",          level: 85 },
       { name: "Laravel",    icon: "fab fa-laravel",      level: 85 },
-      { name: "Python",     icon: "fab fa-python",       level: 85 },
-      { name: "FastAPI",    icon: "fas fa-bolt",         level: 75 },
+      { name: "Python",     icon: "fab fa-python",       level: 70 },
+      { name: "FastAPI",    icon: "fas fa-bolt",         level: 70 },
       { name: "TypeScript", icon: "fab fa-js",           level: 70 },
-      { name: "Angular",    icon: "fab fa-angular",      level: 60 },
-      { name: "React",      icon: "fab fa-react",        level: 55 },
+      { name: "Angular",    icon: "fab fa-angular",      level: 50 },
+      { name: "React",      icon: "fab fa-react",        level: 50 },
       { name: "HTML5",      icon: "fab fa-html5",        level: 90 },
       { name: "CSS3",       icon: "fab fa-css3-alt",     level: 80 },
     ]
@@ -25,36 +25,40 @@ const SKILLS_DATA = {
     items: [
       { name: "MySQL",      icon: "fas fa-database",     level: 80 },
       { name: "PostgreSQL", icon: "fas fa-database",     level: 70 },
-      { name: "PgAdmin",    icon: "fas fa-table",        level: 70 },
+      { name: "PgAdmin",    icon: "fas fa-table",        level: 60 },
     ]
   },
   "Outils & Logiciels": {
     icon: "fas fa-tools",
     items: [
-      { name: "GitHub",     icon: "fab fa-github",       level: 85 },
+      { name: "GitHub",     icon: "fab fa-github",       level: 80 },
       { name: "GitLab",     icon: "fab fa-gitlab",       level: 80 },
       { name: "Bitbucket",  icon: "fab fa-bitbucket",    level: 80 },
-      { name: "JIRA",       icon: "fab fa-jira",         level: 75 },
+      { name: "JIRA",       icon: "fab fa-jira",         level: 65 },
       { name: "Trello",     icon: "fab fa-trello",       level: 85 },
-      { name: "Postman",    icon: "fas fa-paper-plane",  level: 85 },
-      { name: "Swagger",    icon: "fas fa-file-code",    level: 85 },
+      { name: "Postman",    icon: "fas fa-paper-plane",  level: 90 },
+      { name: "Swagger",    icon: "fas fa-file-code",    level: 90 },
       { name: "Docker",     icon: "fab fa-docker",       level: 60 },
       { name: "Maven",      icon: "fas fa-box",          level: 70 },
+      { name:  "Intelligence artificielle", icon: "", level: 65},
+      { name: "VS Code", icon: "", level: 90},
+      { name: "Intellij  IDEA", icon: "", level: 80},
+      { name: "Cursor", icon: "", level: 90}
     ]
   },
   "Modélisation": {
     icon: "fas fa-project-diagram",
     items: [
-      { name: "UML",        icon: "fas fa-sitemap",      level: 85 },
+      { name: "UML",        icon: "fas fa-sitemap",      level: 80 },
       { name: "PowerAMC",   icon: "fas fa-cube",         level: 80 },
     ]
   },
   "Soft Skills": {
     icon: "fas fa-heart",
     items: [
-      { name: "Communication",    icon: "fas fa-comments",    level: 90 },
-      { name: "Travail d'équipe", icon: "fas fa-users",       level: 95 },
-      { name: "Problem Solving",  icon: "fas fa-lightbulb",   level: 90 },
+      { name: "Communication",    icon: "fas fa-comments",    level: 80 },
+      { name: "Travail d'équipe", icon: "fas fa-users",       level: 80 },
+      { name: "Problem Solving",  icon: "fas fa-lightbulb",   level: 85 },
       { name: "Adaptabilité",     icon: "fas fa-sync-alt",    level: 80 },
     ]
   }
@@ -192,8 +196,8 @@ const TRANSLATIONS = {
 };
 
 const TYPED_ROLES = {
-  fr: ["Développeur Backend", "Spring Boot Expert", "Laravel Developer", "API REST Architect", "Junior Data Science"],
-  en: ["Backend Developer",   "Spring Boot Expert", "Laravel Developer", "REST API Architect", "Junior Data Science"]
+  fr: ["Développeur Backend", "Spring Boot Avancé", "Développeur Laravel", "API REST Architecte", "Junior Data Science"],
+  en: ["Backend Developer",   "Advanced Spring Boot", "Laravel Developer", "REST API Architect", "Junior Data Science"]
 };
 
 // ─── STATE ──────────────────────────────────────────
@@ -539,7 +543,7 @@ function initContactForm() {
     try {
       emailjs.init({ publicKey: 'Lx7MiIn6-s_kzUb5i', blockHeadless: true });
 
-      const response = await emailjs.send("service_dwrq7h5", "template_mmfxoip", {
+      const response = await emailjs.send("service_ajbio1f", "template_mmfxoip", {
         title:   document.getElementById("contact-subject")?.value || "",
         name:    document.getElementById("contact-name")?.value || "",
         message: document.getElementById("contact-msg")?.value || "",

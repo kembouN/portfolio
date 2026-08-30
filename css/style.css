@@ -640,6 +640,14 @@ body.light-mode .photo-badge {
   bottom: 5%; right: -10%;
   animation-delay: 3s;
 }
+.photo-badge--4 {
+  top: 10%; left: -10%;
+  animation-delay: 4.5s;
+}
+.photo-badge--5 {
+  bottom: 43%; right: -23%;
+  animation-delay: 6s;
+}
 @keyframes badgeFloat {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
