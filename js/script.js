@@ -1,494 +1,571 @@
-document.addEventListener("DOMContentLoaded", function () {
-  setupLanguageSwitcher();
-  displaySkills();
+/* ==============================
+   KNK PORTFOLIO — MAIN SCRIPT
+   ============================== */
 
-  // Animation au scroll
-  const animateOnScroll = function () {
-    const elements = document.querySelectorAll(".animate__animated");
+// ─── DATA ────────────────────────────────────────────
+const SKILLS_DATA = {
+  "Langages & Frameworks": {
+    icon: "fas fa-code",
+    items: [
+      { name: "Java",       icon: "fab fa-java",        level: 80 },
+      { name: "Spring Boot",icon: "fas fa-leaf",         level: 80 },
+      { name: "PHP",        icon: "fab fa-php",          level: 85 },
+      { name: "Laravel",    icon: "fab fa-laravel",      level: 85 },
+      { name: "Python",     icon: "fab fa-python",       level: 85 },
+      { name: "FastAPI",    icon: "fas fa-bolt",         level: 75 },
+      { name: "TypeScript", icon: "fab fa-js",           level: 70 },
+      { name: "Angular",    icon: "fab fa-angular",      level: 60 },
+      { name: "React",      icon: "fab fa-react",        level: 55 },
+      { name: "HTML5",      icon: "fab fa-html5",        level: 90 },
+      { name: "CSS3",       icon: "fab fa-css3-alt",     level: 80 },
+    ]
+  },
+  "Bases de Données": {
+    icon: "fas fa-database",
+    items: [
+      { name: "MySQL",      icon: "fas fa-database",     level: 80 },
+      { name: "PostgreSQL", icon: "fas fa-database",     level: 70 },
+      { name: "PgAdmin",    icon: "fas fa-table",        level: 70 },
+    ]
+  },
+  "Outils & Logiciels": {
+    icon: "fas fa-tools",
+    items: [
+      { name: "GitHub",     icon: "fab fa-github",       level: 85 },
+      { name: "GitLab",     icon: "fab fa-gitlab",       level: 80 },
+      { name: "Bitbucket",  icon: "fab fa-bitbucket",    level: 80 },
+      { name: "JIRA",       icon: "fab fa-jira",         level: 75 },
+      { name: "Trello",     icon: "fab fa-trello",       level: 85 },
+      { name: "Postman",    icon: "fas fa-paper-plane",  level: 85 },
+      { name: "Swagger",    icon: "fas fa-file-code",    level: 85 },
+      { name: "Docker",     icon: "fab fa-docker",       level: 60 },
+      { name: "Maven",      icon: "fas fa-box",          level: 70 },
+    ]
+  },
+  "Modélisation": {
+    icon: "fas fa-project-diagram",
+    items: [
+      { name: "UML",        icon: "fas fa-sitemap",      level: 85 },
+      { name: "PowerAMC",   icon: "fas fa-cube",         level: 80 },
+    ]
+  },
+  "Soft Skills": {
+    icon: "fas fa-heart",
+    items: [
+      { name: "Communication",    icon: "fas fa-comments",    level: 90 },
+      { name: "Travail d'équipe", icon: "fas fa-users",       level: 95 },
+      { name: "Problem Solving",  icon: "fas fa-lightbulb",   level: 90 },
+      { name: "Adaptabilité",     icon: "fas fa-sync-alt",    level: 80 },
+    ]
+  }
+};
 
-    elements.forEach((element) => {
-      const elementPosition = element.getBoundingClientRect().top;
-      const screenPosition = window.innerHeight / 1.3;
+const TRANSLATIONS = {
+  fr: {
+    "nav.about":      "À propos",
+    "nav.skills":     "Compétences",
+    "nav.experience": "Expérience",
+    "nav.contact":    "Contact",
 
-      if (elementPosition < screenPosition) {
-        const animationClass = element.classList[1];
-        element.classList.add(animationClass);
+    "hero.available": "Disponible pour de nouvelles opportunités",
+    "hero.greeting":  "Bonjour, je suis",
+    "hero.desc":      "Spécialisé en Spring Boot, Laravel et développement d'APIs REST.\nPassionné par la qualité logicielle et les architectures robustes.",
+    "hero.contact":   "Me contacter",
+    "hero.download":  "Télécharger CV",
+    "hero.stat1":     "ans d'expérience",
+    "hero.stat2":     "projets réalisés",
+    "hero.stat3":     "entreprises",
+
+    "about.tag":      "Qui suis-je ?",
+    "about.title":    "À propos de moi",
+    "about.bio":      "Étudiant en Master Data Science et titulaire d'une Licence de technologie en ingénierie logicielle, je suis concepteur de solutions web robustes, développeur REST API, passionné par la qualité logicielle.",
+    "about.birth":    "Date de naissance",
+    "about.location": "Localisation",
+    "about.country":  "Cameroun",
+    "about.phone":    "Téléphone",
+    "about.languages":"Langues",
+    "about.education":"Formation",
+    "lang.french":    "Français",
+    "lang.english":   "Anglais",
+
+    "skills.tag":     "Stack technique",
+    "skills.title":   "Compétences Techniques",
+    "skills.lang":    "Langages & Frameworks",
+    "skills.db":      "Bases de Données",
+    "skills.tools":   "Outils & Logiciels",
+    "skills.model":   "Modélisation",
+    "skills.soft":    "Soft Skills",
+
+    "exp.tag":               "Mon parcours",
+    "exp.title":             "Expérience Professionnelle",
+    "exp.type.pro":          "Stage",
+    "exp.type.personal":     "Personnel",
+    "exp.type.current":      "Actuel",
+    "exp.present":           "Présent",
+    "exp.abyster.role":      "Développeur Backend",
+    "exp.abyster.p1":        "Analyse du système, mise en place de la base de données et implémentation des APIs REST avec Spring Boot 3",
+    "exp.abyster.p2":        "APIs REST pour application de consultation à distance avec Laravel 9",
+    "exp.abyster.p3":        "APIs REST pour application de gestion des hôpitaux avec Laravel 9",
+    "exp.jobfinder.role":    "Projet Personnel",
+    "exp.jobfinder.desc":    "Application web de recherche de travail utilisant Spring Boot 3 et Angular 19",
+    "exp.synthexis.role":    "Développeur Web",
+    "exp.synthexis.p1":      "Développement et déploiement d'un site web utilisant Laravel 10",
+    "exp.synthexis.p2":      "Développement d'une application de gestion avec Spring Boot 3 et Angular 19",
+
+    "contact.tag":    "Travaillons ensemble",
+    "contact.title":  "Contact",
+    "contact.stay":   "Restons en contact",
+    "contact.desc":   "N'hésitez pas à me contacter pour des opportunités ou collaborations.",
+
+    "form.name":      "Nom",
+    "form.email":     "Email",
+    "form.subject":   "Sujet",
+    "form.message":   "Message",
+    "form.send":      "Envoyer le message",
+
+    "footer.rights":  "Tous droits réservés",
+  },
+  en: {
+    "nav.about":      "About",
+    "nav.skills":     "Skills",
+    "nav.experience": "Experience",
+    "nav.contact":    "Contact",
+
+    "hero.available": "Available for new opportunities",
+    "hero.greeting":  "Hello, I'm",
+    "hero.desc":      "Specialized in Spring Boot, Laravel and REST APIs development.\nPassionate about software quality and robust architectures.",
+    "hero.contact":   "Contact me",
+    "hero.download":  "Download CV",
+    "hero.stat1":     "years of experience",
+    "hero.stat2":     "completed projects",
+    "hero.stat3":     "companies",
+
+    "about.tag":      "Who am I?",
+    "about.title":    "About me",
+    "about.bio":      "Master Data Science student and holder of a Bachelor's degree in Software Engineering, I design robust web solutions, develop REST APIs, and am passionate about software quality.",
+    "about.birth":    "Date of birth",
+    "about.location": "Location",
+    "about.country":  "Cameroon",
+    "about.phone":    "Phone",
+    "about.languages":"Languages",
+    "about.education":"Education",
+    "lang.french":    "French",
+    "lang.english":   "English",
+
+    "skills.tag":     "Tech stack",
+    "skills.title":   "Technical Skills",
+    "skills.lang":    "Languages & Frameworks",
+    "skills.db":      "Databases",
+    "skills.tools":   "Tools & Software",
+    "skills.model":   "Modeling",
+    "skills.soft":    "Soft Skills",
+
+    "exp.tag":               "My journey",
+    "exp.title":             "Professional Experience",
+    "exp.type.pro":          "Internship",
+    "exp.type.personal":     "Personal",
+    "exp.type.current":      "Current",
+    "exp.present":           "Present",
+    "exp.abyster.role":      "Backend Developer",
+    "exp.abyster.p1":        "System analysis, database setup and REST APIs implementation with Spring Boot 3",
+    "exp.abyster.p2":        "REST APIs for remote consultation application using Laravel 9",
+    "exp.abyster.p3":        "REST APIs for hospital management application using Laravel 9",
+    "exp.jobfinder.role":    "Personal Project",
+    "exp.jobfinder.desc":    "Job search web application using Spring Boot 3 and Angular 19",
+    "exp.synthexis.role":    "Web Developer",
+    "exp.synthexis.p1":      "Development and deployment of a website using Laravel 10",
+    "exp.synthexis.p2":      "Development of a management application with Spring Boot 3 and Angular 19",
+
+    "contact.tag":    "Let's work together",
+    "contact.title":  "Contact",
+    "contact.stay":   "Let's stay in touch",
+    "contact.desc":   "Do not hesitate to contact me for opportunities or collaborations.",
+
+    "form.name":      "Name",
+    "form.email":     "Email",
+    "form.subject":   "Subject",
+    "form.message":   "Message",
+    "form.send":      "Send message",
+
+    "footer.rights":  "All rights reserved",
+  }
+};
+
+const TYPED_ROLES = {
+  fr: ["Développeur Backend", "Spring Boot Expert", "Laravel Developer", "API REST Architect", "Junior Data Science"],
+  en: ["Backend Developer",   "Spring Boot Expert", "Laravel Developer", "REST API Architect", "Junior Data Science"]
+};
+
+// ─── STATE ──────────────────────────────────────────
+let currentLang = localStorage.getItem("knk-lang") || "fr";
+let currentTheme = localStorage.getItem("knk-theme") || "dark";
+
+// ─── INIT ───────────────────────────────────────────
+document.addEventListener("DOMContentLoaded", () => {
+  applyTheme(currentTheme);
+  applyLang(currentLang);
+  buildSkills();
+  initTyped();
+  initScrollProgress();
+  initHeader();
+  initMobileMenu();
+  initReveal();
+  initLangBars();
+  initSkillBars();
+  initCursor();
+  initSmoothScroll();
+  initContactForm();
+  initActiveNav();
+});
+
+// ─── THEME ──────────────────────────────────────────
+function applyTheme(theme) {
+  currentTheme = theme;
+  const icon = document.getElementById("theme-icon");
+  if (theme === "light") {
+    document.body.classList.add("light-mode");
+    if (icon) { icon.className = "fas fa-sun"; }
+  } else {
+    document.body.classList.remove("light-mode");
+    if (icon) { icon.className = "fas fa-moon"; }
+  }
+  localStorage.setItem("knk-theme", theme);
+}
+
+document.getElementById("theme-toggle")?.addEventListener("click", () => {
+  applyTheme(currentTheme === "dark" ? "light" : "dark");
+});
+
+// ─── LANGUAGE ───────────────────────────────────────
+function applyLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  localStorage.setItem("knk-lang", lang);
+
+  // Update all [data-i18n] elements
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (TRANSLATIONS[lang][key] !== undefined) {
+      el.textContent = TRANSLATIONS[lang][key];
+    }
+  });
+
+  // Update lang button states
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.lang === lang);
+  });
+
+  // Update skill category titles if rendered
+  updateSkillCategoryTitles(lang);
+}
+
+document.querySelectorAll(".lang-btn").forEach(btn => {
+  btn.addEventListener("click", () => applyLang(btn.dataset.lang));
+});
+
+function updateSkillCategoryTitles(lang) {
+  const keyMap = {
+    "Langages & Frameworks": "skills.lang",
+    "Bases de Données": "skills.db",
+    "Outils & Logiciels": "skills.tools",
+    "Modélisation": "skills.model",
+    "Soft Skills": "skills.soft",
+  };
+  document.querySelectorAll(".skill-category-name[data-key]").forEach(el => {
+    const key = keyMap[el.dataset.key];
+    if (key && TRANSLATIONS[lang][key]) {
+      el.textContent = TRANSLATIONS[lang][key];
+    }
+  });
+}
+
+// ─── SKILLS BUILD ────────────────────────────────────
+function buildSkills() {
+  const wrapper = document.getElementById("skills-wrapper");
+  if (!wrapper) return;
+
+  Object.entries(SKILLS_DATA).forEach(([category, { icon, items }], catIdx) => {
+    const catEl = document.createElement("div");
+    catEl.className = "skill-category reveal";
+    catEl.style.transitionDelay = `${catIdx * 0.1}s`;
+
+    // Header
+    const header = document.createElement("div");
+    header.className = "skill-category-header";
+    header.innerHTML = `
+      <div class="skill-category-icon"><i class="${icon}"></i></div>
+      <span class="skill-category-name" data-key="${category}">${category}</span>
+      <div class="skill-category-line"></div>
+    `;
+    catEl.appendChild(header);
+
+    // Cards
+    const cards = document.createElement("div");
+    cards.className = "skills-cards";
+
+    items.forEach((skill, idx) => {
+      const card = document.createElement("div");
+      card.className = "skill-card";
+      card.style.transitionDelay = `${idx * 0.05}s`;
+      card.innerHTML = `
+        <div class="skill-icon"><i class="${skill.icon}"></i></div>
+        <span class="skill-name">${skill.name}</span>
+        <div class="skill-level-bar">
+          <div class="skill-level-fill" data-level="${skill.level}"></div>
+        </div>
+        <span class="skill-percent">${skill.level}%</span>
+      `;
+      cards.appendChild(card);
+    });
+
+    catEl.appendChild(cards);
+    wrapper.appendChild(catEl);
+  });
+}
+
+// ─── TYPED EFFECT ────────────────────────────────────
+function initTyped() {
+  const el = document.getElementById("typed-role");
+  if (!el) return;
+
+  let roleIdx = 0, charIdx = 0, deleting = false;
+
+  function tick() {
+    const roles = TYPED_ROLES[currentLang];
+    const current = roles[roleIdx];
+
+    if (!deleting) {
+      el.textContent = current.substring(0, charIdx + 1);
+      charIdx++;
+      if (charIdx === current.length) {
+        deleting = true;
+        setTimeout(tick, 2000);
+        return;
+      }
+    } else {
+      el.textContent = current.substring(0, charIdx - 1);
+      charIdx--;
+      if (charIdx === 0) {
+        deleting = false;
+        roleIdx = (roleIdx + 1) % roles.length;
+      }
+    }
+    setTimeout(tick, deleting ? 60 : 100);
+  }
+  tick();
+}
+
+// ─── SCROLL PROGRESS ─────────────────────────────────
+function initScrollProgress() {
+  const bar = document.getElementById("scroll-progress");
+  if (!bar) return;
+  window.addEventListener("scroll", () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    bar.style.width = pct + "%";
+  });
+}
+
+// ─── HEADER SCROLL ───────────────────────────────────
+function initHeader() {
+  const header = document.getElementById("header");
+  if (!header) return;
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("scrolled", window.scrollY > 60);
+  });
+}
+
+// ─── MOBILE MENU ─────────────────────────────────────
+function initMobileMenu() {
+  const btn = document.getElementById("mobile-menu-btn");
+  const nav = document.getElementById("nav");
+  if (!btn || !nav) return;
+
+  btn.addEventListener("click", () => {
+    const open = nav.classList.toggle("open");
+    btn.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", open);
+  });
+
+  // Close on link click
+  nav.querySelectorAll(".nav-link").forEach(link => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("open");
+      btn.classList.remove("open");
+    });
+  });
+}
+
+// ─── REVEAL ON SCROLL ────────────────────────────────
+function initReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add("visible");
+        }, 80);
+        observer.unobserve(entry.target);
       }
     });
-  };
+  }, { threshold: 0.12 });
 
-  window.addEventListener("scroll", animateOnScroll);
-  animateOnScroll(); // Exécuter une fois au chargement
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+}
 
-  // Header scroll effect
-  const header = document.querySelector(".header");
-  window.addEventListener("scroll", function () {
-    if (window.scrollY > 100) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
-    }
+// ─── LANGUAGE BARS ───────────────────────────────────
+function initLangBars() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll(".lang-fill").forEach(fill => {
+          fill.style.width = fill.dataset.width + "%";
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const aboutSection = document.getElementById("about");
+  if (aboutSection) observer.observe(aboutSection);
+}
+
+// ─── SKILL BARS ──────────────────────────────────────
+function initSkillBars() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll(".skill-level-fill").forEach(fill => {
+          fill.style.width = fill.dataset.level + "%";
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  const skillsSection = document.getElementById("skills");
+  if (skillsSection) observer.observe(skillsSection);
+}
+
+// ─── CURSOR ──────────────────────────────────────────
+function initCursor() {
+  const cursor = document.getElementById("cursor");
+  const follower = document.getElementById("cursor-follower");
+  if (!cursor || !follower) return;
+
+  // Only on non-touch
+  if (window.matchMedia("(pointer: coarse)").matches) {
+    cursor.style.display = "none";
+    follower.style.display = "none";
+    return;
+  }
+
+  let mx = 0, my = 0, fx = 0, fy = 0;
+
+  window.addEventListener("mousemove", e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + "px";
+    cursor.style.top = my + "px";
   });
 
-  // Menu mobile
-  const mobileMenuBtn = document.querySelector(".mobile-menu");
-  const nav = document.querySelector(".nav");
+  (function animFollower() {
+    fx += (mx - fx) * 0.15;
+    fy += (my - fy) * 0.15;
+    follower.style.left = fx + "px";
+    follower.style.top = fy + "px";
+    requestAnimationFrame(animFollower);
+  })();
 
-  mobileMenuBtn.addEventListener("click", function () {
-    nav.classList.toggle("active");
-  });
-
-  // Smooth scrolling
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      const targetId = this.getAttribute("href");
-      const targetElement = document.querySelector(targetId);
-
-      window.scrollTo({
-        top: targetElement.offsetTop - 80,
-        behavior: "smooth",
-      });
-
-      // Fermer le menu mobile si ouvert
-      nav.classList.remove("active");
+  // Scale on hover interactive elements
+  document.querySelectorAll("a, button, .skill-card, .info-card, .contact-item").forEach(el => {
+    el.addEventListener("mouseenter", () => {
+      follower.style.width = "60px";
+      follower.style.height = "60px";
+      follower.style.borderColor = "rgba(139,92,246,0.6)";
+    });
+    el.addEventListener("mouseleave", () => {
+      follower.style.width = "36px";
+      follower.style.height = "36px";
+      follower.style.borderColor = "rgba(139,92,246,0.5)";
     });
   });
+}
 
-  // Animation des barres de progression
-  const animateProgressBars = function () {
-    const progressBars = document.querySelectorAll(".progress-fill");
+// ─── SMOOTH SCROLL ───────────────────────────────────
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+      const target = document.querySelector(this.getAttribute("href"));
+      if (!target) return;
+      e.preventDefault();
+      const headerH = document.getElementById("header")?.offsetHeight || 80;
+      window.scrollTo({ top: target.offsetTop - headerH, behavior: "smooth" });
+    });
+  });
+}
 
-    progressBars.forEach((bar) => {
-      const width = bar.style.width;
-      bar.style.width = "0";
+// ─── ACTIVE NAV ──────────────────────────────────────
+function initActiveNav() {
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".nav-link");
 
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`);
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(sec => observer.observe(sec));
+}
+
+// ─── CONTACT FORM ────────────────────────────────────
+function initContactForm() {
+  const form = document.getElementById("contact-form");
+  const feedback = document.getElementById("submit-feedback");
+  if (!form) return;
+
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById("submit-btn");
+    const originalHtml = btn.innerHTML;
+
+    // Loading state
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+    btn.disabled = true;
+
+    try {
+      emailjs.init({ publicKey: 'Lx7MiIn6-s_kzUb5i', blockHeadless: true });
+
+      const response = await emailjs.send("service_dwrq7h5", "template_mmfxoip", {
+        title:   document.getElementById("contact-subject")?.value || "",
+        name:    document.getElementById("contact-name")?.value || "",
+        message: document.getElementById("contact-msg")?.value || "",
+        email:   document.getElementById("contact-email")?.value || "",
+      });
+
+      if (feedback) {
+        feedback.textContent = currentLang === "fr"
+          ? "✓ Message envoyé avec succès !"
+          : "✓ Message sent successfully!";
+        feedback.style.color = "#4ade80";
+      }
+      form.reset();
+    } catch (err) {
+      if (feedback) {
+        feedback.textContent = currentLang === "fr"
+          ? "✗ Erreur lors de l'envoi. Réessayez."
+          : "✗ Error sending message. Please retry.";
+        feedback.style.color = "#f87171";
+      }
+    } finally {
+      btn.innerHTML = originalHtml;
+      btn.disabled = false;
       setTimeout(() => {
-        bar.style.width = width;
-      }, 100);
-    });
-  };
-
-  // Observer pour déclencher l'animation des barres de progression
-  const aboutSection = document.querySelector(".about");
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateProgressBars();
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-
-  observer.observe(aboutSection);
-
-  // Formulaire de contact
-  const contactForm = document.querySelector(".contact-form");
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      emailjs.init({
-        publicKey: 'Lx7MiIn6-s_kzUb5i',
-        // Do not allow headless browsers
-        blockHeadless: true,
-        
-        limitRate: {
-          // Set the limit rate for the application
-          id: 'portfolio-contact',
-          // Allow 1 request per 10s
-          throttle: 10000,
-        },
-      });
-      const title = document.getElementById("contact-subject").value;
-      const name = document.getElementById("contact-name").value;
-      const message = document.getElementById("contact-msg").value;
-      const email = document.getElementById("contact-email").value;
-      let feedback = document.getElementById("submit-feedback");
-      emailjs.send("service_dwrq7h5","template_mmfxoip",{
-        title: title,
-        name: name,
-        message: message,
-        email: email
-      }).then(function(response) {
-        response.status === 200
-          ? (feedback.textContent = "Message envoyé avec succès!")
-          : (feedback.textContent = "Erreur lors de l'envoi du message.");
-        feedback.style.color = response.status === 200 ? "green" : "red";
-      });
-      this.reset();
-    });
-  }
-});
-
-function displaySkills() {
-  const skillsGrid = document.querySelector(".skills-grid");
-
-  if (!skillsGrid) return;
-
-  // Toutes vos compétences organisées
-  const skillsData = {
-    "Langages & Frameworks": [
-      { name: "Java", icon: "fab fa-java", level: 80 },
-      { name: "Spring Boot", icon: "fas fa-leaf", level: 80 },
-      { name: "PHP", icon: "fab fa-php", level: 85 },
-      { name: "Laravel", icon: "fab fa-laravel", level: 85 },
-      { name: "TypeScript", icon: "fab fa-js", level: 70 },
-      { name: "Angular", icon: "fab fa-angular", level: 60 },
-      { name: "HTML5", icon: "fab fa-html5", level: 90 },
-      { name: "CSS3", icon: "fab fa-css3-alt", level: 80 },
-    ],
-    "Bases de Données": [
-      { name: "MySQL", icon: "fas fa-database", level: 80 },
-      { name: "PostgreSQL", icon: "fas fa-database", level: 70 },
-      { name: "PgAdmin", icon: "fas fa-database", level: 70 },
-    ],
-    "Outils & Logiciels": [
-      { name: "GitHub", icon: "fab fa-github", level: 85 },
-      { name: "GitLab", icon: "fab fa-gitlab", level: 80 },
-      { name: "Bitbucket", icon: "fab fa-bitbucket", level: 80 },
-      { name: "JIRA", icon: "fab fa-jira", level: 75 },
-      { name: "Trello", icon: "fab fa-trello", level: 85 },
-      { name: "Maven", icon: "fas fa-code", level: 70 },
-      { name: "Postman", icon: "fas fa-wifi", level: 85 },
-      { name: "Swagger", icon: "fas fa-file-code", level: 85 },
-      { name: "MS Office", icon: "fas fa-file-word", level: 85 },
-      { name: "Docker", icon: "fab fa-docker", level: 60 },
-    ],
-    Modélisation: [
-      { name: "UML", icon: "fas fa-project-diagram", level: 85 },
-      { name: "PowerAMC", icon: "fas fa-cube", level: 80 },
-    ],
-    "Soft Skills": [
-      { name: "Communication", icon: "fas fa-comments", level: 90 },
-      { name: "Travail d'équipe / Team work", icon: "fas fa-users", level: 95 },
-      {
-        name: "Résolution de problèmes / Problem solving",
-        icon: "fas fa-lightbulb",
-        level: 90,
-      },
-      {
-        name: "Adaptabilité / Adaptability",
-        icon: "fas fa-sync-alt",
-        level: 80,
-      },
-    ],
-  };
-
-  // Affichage des compétences
-  for (const category in skillsData) {
-    const currentLang = localStorage.getItem("portfolio-lang") || "fr";
-    // Titre de catégorie
-    const categoryTitle = document.createElement("h3");
-    categoryTitle.className = "skills-category-title";
-    switch (category) {
-      case "Langages & Frameworks":
-        categoryTitle.textContent =
-          currentLang === "fr"
-            ? "Langages & Frameworks"
-            : "Languages & Frameworks";
-        break;
-      case "Bases de Données":
-        categoryTitle.textContent =
-          currentLang === "fr" ? "Bases de données" : "DataBases";
-        break;
-      case "Outils & Logiciels":
-        categoryTitle.textContent =
-          currentLang === "fr" ? "Outils & Logiciels" : "Tools and Softwares";
-        break;
-      case "Modélisation":
-        categoryTitle.textContent =
-          currentLang === "fr" ? "Modélisation" : "Modeling";
-        break;
-      case "Soft Skills":
-        categoryTitle.textContent = "Soft Skills";
-        break;
-      default:
-        break;
+        if (feedback) feedback.textContent = "";
+      }, 5000);
     }
-    // categoryTitle.textContent = category;
-    const categoryGroupe = document.createElement("div");
-    categoryGroupe.className =
-      "skills-category-group animate__animated animate__fadeIn";
-    categoryGroupe.appendChild(categoryTitle);
-    const skillCardGroup = document.createElement("div");
-    skillCardGroup.className = "skills-card-group";
-    // skillCardGroup.appendChild(categoryGroupe);
-
-    // Compétences
-    skillsData[category].forEach((skill, index) => {
-      const skillCard = document.createElement("div");
-      skillCard.className = "skill-card animate__animated animate__fadeIn";
-
-      skillCard.innerHTML = `
-                <div class="skill-icon">
-                    <i class="${skill.icon}"></i>
-                </div>
-                <h3>${skill.name}</h3>
-                <div class="skill-level">
-                    <div class="level-bar" style="width: ${skill.level}%"></div>
-                    <span>${skill.level}%</span>
-                </div>
-            `;
-
-      // Délai d'animation progressif
-      skillCard.style.animationDelay = `${index * 0.1}s`;
-
-      skillCardGroup.appendChild(skillCard);
-    });
-    categoryGroupe.appendChild(skillCardGroup);
-    skillsGrid.appendChild(categoryGroupe);
-  }
-}
-
-// Scroll progress bar
-const scrollBar = document.createElement("div");
-scrollBar.id = "scroll-bar";
-document.body.prepend(scrollBar);
-
-window.addEventListener("scroll", () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const scrollPercent = (scrollTop / docHeight) * 100;
-  scrollBar.style.width = scrollPercent + "%";
-});
-
-// Mode Sombre
-const themeToggle = document.createElement("button");
-themeToggle.className = "theme-toggle";
-themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-document.body.appendChild(themeToggle);
-
-themeToggle.addEventListener("click", function () {
-  document.body.classList.toggle("dark-mode");
-
-  if (document.body.classList.contains("dark-mode")) {
-    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    localStorage.setItem("theme", "dark");
-  } else {
-    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    localStorage.setItem("theme", "light");
-  }
-});
-
-// Vérifier le thème au chargement
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-mode");
-  themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-}
-
-// Gestion du changement de langue
-function setupLanguageSwitcher() {
-  const langBtns = document.querySelectorAll(".lang-btn");
-  const currentLang = localStorage.getItem("portfolio-lang") || "fr";
-
-  // Activer la langue courante
-  document.documentElement.lang = currentLang;
-  document
-    .querySelector(`.lang-btn[data-lang="${currentLang}"]`)
-    .classList.add("active");
-
-  // Traductions
-  const translations = {
-    fr: {
-      "hero-title": "Kembou Nimpa Karlson",
-      "hero-subtitle": "Développeur Web Backend",
-      "hero-text":
-        "Spécialisé en Spring Boot, Laravel et développement d'APIs REST",
-      "contact-btn": "Me contacter",
-      "download-cv": "Télecharger mon CV",
-      "about-title": "À propos",
-      "about-text":
-        "Étudiant en Master Data Science et titulaire d'une Licence de technologie en ingénierie logicielle, je suis concepteur de solutions web robustes, développeur REST API, passionné par la qualité logicielle.",
-      "about-date": "Date de naissance",
-      "about-phone": "Téléphone",
-      "about-langue": "Langues",
-      "langue-francais": "Français",
-      "langue-anglais": "Anglais",
-
-      skills: "Compétences",
-
-      experience: "Expérience",
-      "experience-pro": "Expérience Professionnelle",
-
-      "experience.abyster.title": "Abyster Consulting",
-      "experience.abyster.role": "Développeur Backend",
-      "experience.abyster.project1":
-        "CopilotHRM: Analyse du système, mise en place de la base de données et implémentation des APIs REST avec Spring Boot 3",
-      "experience.abyster.project2":
-        "Téléconsultation: APIs REST pour application de consultation à distance avec Laravel 9",
-      "experience.abyster.project3":
-        "Magnolia: APIs REST pour application de gestion des hôpitaux avec Laravel 9",
-      "experience.jobfinder.title": "JobFinder",
-      "experience.jobfinder.role": "Projet Personnel",
-      "experience.jobfinder.description":
-        "Application web de recherche de travail utilisant Spring Boot 3 et Angular 19",
-      "experience.synthexis.title": "Synthexis Sarl",
-      "experience.synthexis.role": "Développeur Web",
-      "experience.synthexis.project1":
-        "Développement et déploiement d'un site web utilisant Laravel 10",
-      "experience.synthexis.project2":
-        "Développement d'une application de gestion avec Spring boot 3 et Angular 19",
-
-      "contact.stay": "Restons en contact",
-      "contact.desc":
-        "N'hésitez pas à me contacter pour des opportunités ou collaborations.",
-      "contact.send-message": "Envoyez le message",
-      droits: "Tous droits réservés",
-
-      country: "Cameroun",
-      // Ajoutez toutes les autres traductions nécessaires
-    },
-    en: {
-      "hero-title": "Kembou Nimpa Karlson",
-      "hero-subtitle": "Backend Web Developer",
-      "hero-text":
-        "Specialized in Spring Boot, Laravel and REST APIs development",
-      "contact-btn": "Contact me",
-      "download-cv": "Download my CV",
-      "about-title": "About",
-      "about-text": "",
-      "about-date": "Birth date",
-      "about-phone": "Phone",
-      "about-langue": "Languages",
-      "langue-francais": "French",
-      "langue-anglais": "English",
-
-      skills: "Skills",
-      "technical-skills": "Compétences Techniques",
-
-      // Ajoutez toutes les autres traductions nécessaires
-      experience: "Experience",
-      "experience-pro": "Professionnal Experience",
-      "experience.abyster.title": "Abyster Consulting",
-      "experience.abyster.role": "Backend Developer",
-      "experience.abyster.project1":
-        "CopilotHRM: System analysis, database setup and REST APIs implementation with Spring Boot 3",
-      "experience.abyster.project2":
-        "Teleconsultation: REST APIs for remote consultation application using Laravel 9",
-      "experience.abyster.project3":
-        "Magnolia: REST APIs for hospital management application using Laravel 9",
-      "experience.jobfinder.title": "JobFinder",
-      "experience.jobfinder.role": "Personal Project",
-      "experience.jobfinder.description":
-        "Job search web application using Spring Boot 3 and Angular 19",
-      "experience.synthexis.title": "Synthexis Sarl",
-      "experience.synthexis.role": "Web Developer",
-      "experience.synthexis.project1":
-        "Development and deployment of a website using Laravel 10",
-      "experience.synthexis.project2":
-        "Development of a management application with Spring Boot 3 and Angular 19",
-
-      "contact.stay": "Let's stay in touch",
-      "contact.desc":
-        "Do not hesitate to contact me for opportunities or collaborations",
-      "contact.send-message": "Send message",
-      droits: "All rights reserved",
-
-      country: "Cameroon",
-    },
-  };
-
-  // Fonction de traduction
-  function updateContent(lang) {
-    document.documentElement.lang = lang;
-
-    // Exemple pour quelques éléments :
-    document.querySelector(".nav .about").textContent =
-      translations[lang]["about-title"];
-    document.querySelector(".nav .skill").textContent =
-      translations[lang]["skills"];
-    document.querySelector(".nav .expe").textContent =
-      translations[lang]["experience"];
-    document.querySelector(".hero h1").textContent =
-      translations[lang]["hero-title"];
-    document.querySelector(".hero h2").textContent =
-      translations[lang]["hero-subtitle"];
-    document.querySelector(".hero p").textContent =
-      translations[lang]["hero-text"];
-    document.querySelector(".hero .btn").textContent =
-      translations[lang]["contact-btn"];
-    document.querySelector("#about .section-title").textContent =
-      translations[lang]["about-title"];
-    document.querySelector(".biography").textContent =
-      translations[lang]["about-text"];
-    document.querySelector(".birthday").textContent =
-      translations[lang]["about-date"];
-    document.querySelector(".download-cv").textContent =
-      translations[lang]["download-cv"];
-    document.querySelector(".tel").textContent =
-      translations[lang]["about-phone"];
-    document.querySelector(".about-languages h3").textContent =
-      translations[lang]["about-langue"];
-    document.querySelector(".language .french").textContent =
-      translations[lang]["langue-francais"];
-    document.querySelector(".language .english").textContent =
-      translations[lang]["langue-anglais"];
-    document.querySelector(".experience h2").textContent =
-      translations[lang]["experience-pro"];
-    document.querySelector(".timeline-item h4").textContent =
-      translations[lang]["experience.abyster.role"];
-    document.querySelector(".experience .copilot").textContent =
-      translations[lang]["experience.abyster.project1"];
-    document.querySelector(".experience .teleconsult").textContent =
-      translations[lang]["experience.abyster.project2"];
-    document.querySelector(".experience .magnolia").textContent =
-      translations[lang]["experience.abyster.project3"];
-    document.querySelector(".projet-perso").textContent =
-      translations[lang]["experience.jobfinder.role"];
-    document.querySelector(".projet-perso-descr").textContent =
-      translations[lang]["experience.jobfinder.description"];
-    document.querySelector(".syn-role").textContent =
-      translations[lang]["experience.synthexis.role"];
-    document.querySelector(".jtm").textContent =
-      translations[lang]["experience.synthexis.project1"];
-    document.querySelector(".mbc").textContent =
-      translations[lang]["experience.synthexis.project2"];
-    document.querySelector(".contact-info h3").textContent =
-      translations[lang]["contact.stay"];
-    document.querySelector(".contact-text").textContent =
-      translations[lang]["contact.desc"];
-    document.querySelector(".country").textContent =
-      translations[lang]["country"];
-    document.querySelector(".contact-form button").textContent =
-      translations[lang]["contact.send-message"];
-    document.querySelector(".droits").textContent =
-      translations[lang]["droits"];
-
-    // Ajoutez des sélecteurs pour tous les éléments à traduire
-  }
-
-  // Gestion des clics
-  langBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const lang = btn.dataset.lang;
-
-      // Mettre à jour l'interface
-      langBtns.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      // Changer le contenu
-      updateContent(lang);
-
-      // Sauvegarder la préférence
-      localStorage.setItem("portfolio-lang", lang);
-    });
-  });
-
-  // Charger la langue au démarrage
-  updateContent(currentLang);
-}
-
-function initAutoScroll() {
-  document.querySelectorAll(".skill-card-group").forEach((group) => {
-    group.style.animation = "none";
-    void group.offsetWidth;
-    group.style.animation = "";
   });
 }
-
-// Appelez cette fonction au chargement
-document.addEventListener("DOMContentLoaded", setupLanguageSwitcher);
