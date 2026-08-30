@@ -40,11 +40,10 @@ const SKILLS_DATA = {
       { name: "Swagger",    icon: "fas fa-file-code",    level: 90 },
       { name: "Docker",     icon: "fab fa-docker",       level: 60 },
       { name: "Maven",      icon: "fas fa-box",          level: 70 },
-      { name:  "Intelligence artificielle", icon: "", level: 65},
-      { name: "VS Code", icon: "", level: 90},
-      { name: "Intellij  IDEA", icon: "", level: 80},
-      { name: "Cursor", icon: "", level: 90}
-    ]
+      { name:  "IA", icon: "fas fa-wand-magic-sparkles", level: 65},
+      { name: "VS Code",        icon: "devicon-vscode-plain colored",   level: 90 },
+      { name: "Intellij IDEA",  icon: "si si-intellijidea", level: 80 },
+      { name: "Cursor",         icon: "si si-cursor",                   level: 90 }    ]
   },
   "Modélisation": {
     icon: "fas fa-project-diagram",
