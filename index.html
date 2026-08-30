@@ -4,197 +4,430 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kembou Nimpa Karlson - Développeur Backend</title>
+  <title>Kembou Nimpa Karlson — Développeur Backend</title>
+  <meta name="description" content="Portfolio de Kembou Nimpa Karlson, Développeur Web Backend spécialisé en Spring Boot, Laravel et APIs REST. Basé à Douala, Cameroun.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
 </head>
 
 <body>
-  <header class="header">
-    <div class="container">
-      <div class="logo animate__animated animate__fadeInLeft">
-        <span>KNK</span>
-      </div>
-      <nav class="nav animate__animated animate__fadeInRight">
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+
+  <!-- Scroll progress -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#home" class="logo">
+        <span class="logo-bracket">&lt;</span>KNK<span class="logo-bracket">/&gt;</span>
+      </a>
+      <nav class="nav" id="nav">
         <ul>
-          <li><a href="#about" class="about">À propos</a></li>
-          <li><a href="#skills" class="skill">Compétences</a></li>
-          <li><a href="#experience" class="expe">Expérience</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about" class="nav-link" data-i18n="nav.about">À propos</a></li>
+          <li><a href="#skills" class="nav-link" data-i18n="nav.skills">Compétences</a></li>
+          <li><a href="#experience" class="nav-link" data-i18n="nav.experience">Expérience</a></li>
+          <li><a href="#contact" class="nav-link" data-i18n="nav.contact">Contact</a></li>
         </ul>
       </nav>
-      <div class="mobile-menu">
-        <i class="fas fa-bars"></i>
-      </div>
-      <div class="language-switcher">
-        <button class="lang-btn active" data-lang="fr">FR</button>
-        <button class="lang-btn" data-lang="en">EN</button>
+      <div class="header-actions">
+        <div class="language-switcher">
+          <button class="lang-btn active" data-lang="fr" id="lang-fr">FR</button>
+          <button class="lang-btn" data-lang="en" id="lang-en">EN</button>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-orb hero-orb--1"></div>
+      <div class="hero-orb hero-orb--2"></div>
+      <div class="hero-orb hero-orb--3"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="container hero-inner">
       <div class="hero-content">
-        <h1 class="animate__animated animate__fadeInDown">Kembou Nimpa Karlson</h1>
-        <h2 class="animate__animated animate__fadeInDown animate__delay-1s">Développeur Web Backend</h2>
-        <p class="animate__animated animate__fadeIn animate__delay-2s">Spécialisé en Spring Boot, Laravel et
-          développement d'APIs REST</p>
-        <a href="#contact" class="btn animate__animated animate__fadeInUp animate__delay-3s">Me contacter</a>
-        <a href="asset/cv_kembou_nimpa.pdf"
-          class=" btn animate__animated animate__fadeInUp animate__delay-3s download-cv" download
-          data-i18n="intro.download">Télécharger mon CV</a>
-
-      </div>
-      <div class="hero-image animate__animated animate__fadeInRight animate__delay-1s">
-        <div class="image-wrapper">
-          <img src="./assets/images/profil_portfolio.jpg" alt="Kembou Nimpa Karlson">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span data-i18n="hero.available">Disponible pour de nouvelles opportunités</span>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="section about">
-    <div class="container">
-      <h2 class="section-title animate__animated animate__fadeIn">À propos</h2>
-      <div class="about-content">
-        <div class="about-text animate__animated animate__fadeInLeft">
-          <p class="biography">Étudiant en Master Data Science et titulaire d'une Licence de technologie en ingénierie
-            logicielle, je suis concepteur de solutions web robustes, développeur REST API, passionné par la qualité
-            logicielle.</p>
-          <div class="personal-info">
-            <p><i class="fas fa-birthday-cake"></i> <strong class="birthday">Date de naissance </strong>: 03/06/2002</p>
-            <p><i class="fas fa-map-marker-alt"></i> <strong>Localisation: </strong> Douala, Cameroun</p>
-            <p><i class="fas fa-envelope"></i> <strong>Email: </strong> karlsonkit87@gmail.com</p>
-            <p><i class="fas fa-phone"></i> <strong class="tel">Téléphone </strong>: +237 693 745 998 / 671 340 629</p>
+        <h1 class="hero-title">
+          <span class="hero-greeting" data-i18n="hero.greeting">Bonjour, je suis</span>
+          <span class="hero-name">Kembou Nimpa</span>
+          <span class="hero-name hero-name--accent">Karlson</span>
+        </h1>
+        <div class="hero-role">
+          <span class="role-prefix">&gt;_</span>
+          <span class="role-text" id="typed-role"></span>
+          <span class="role-cursor">|</span>
+        </div>
+        <p class="hero-desc" data-i18n="hero.desc">
+          Spécialisé en Spring Boot, Laravel et développement d'APIs REST.<br>
+          Passionné par la qualité logicielle et les architectures robustes.
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn--primary" data-i18n="hero.contact">
+            <i class="fas fa-paper-plane"></i> Me contacter
+          </a>
+          <a href="assets/cv_kembou_nimpa.pdf" class="btn btn--outline" download data-i18n="hero.download">
+            <i class="fas fa-download"></i> Télécharger CV
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num">2+</span>
+            <span class="stat-label" data-i18n="hero.stat1">ans d'expérience</span>
           </div>
-        </div>
-        <div class="about-languages animate__animated animate__fadeInRight">
-          <h3>Langues</h3>
-          <div class="language-bar">
-            <div class="language">
-              <span class="french">Français</span>
-              <div class="progress">
-                <div class="progress-fill" style="width: 90%;"></div>
-              </div>
-            </div>
-            <div class="language">
-              <span class="english">Anglais</span>
-              <div class="progress">
-                <div class="progress-fill" style="width: 40%;"></div>
-              </div>
-            </div>
-            <div class="language">
-              <span class="ngom">Ngombale</span>
-              <div class="progress">
-                <div class="progress-fill" style="width: 97%;"></div>
-              </div>
-            </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">10+</span>
+            <span class="stat-label" data-i18n="hero.stat2">projets réalisés</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">3</span>
+            <span class="stat-label" data-i18n="hero.stat3">entreprises</span>
           </div>
         </div>
       </div>
+      <div class="hero-visual">
+        <div class="hero-photo-wrapper">
+          <div class="photo-ring photo-ring--outer"></div>
+          <div class="photo-ring photo-ring--inner"></div>
+          <div class="photo-container">
+            <img src="./assets/images/profil_portfolio.jpg" alt="Kembou Nimpa Karlson" class="hero-photo">
+          </div>
+          <div class="photo-badge photo-badge--1">
+            <i class="fab fa-java"></i> Spring Boot
+          </div>
+          <div class="photo-badge photo-badge--2">
+            <i class="fab fa-laravel"></i> Laravel
+          </div>
+          <div class="photo-badge photo-badge--3">
+            <i class="fab fa-angular"></i> Angular
+          </div>
+        </div>
+      </div>
     </div>
+    <a href="#about" class="scroll-indicator">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+    </a>
   </section>
 
-  <section id="skills" class="section skills">
+  <!-- About Section -->
+  <section id="about" class="section">
     <div class="container">
-      <h2 class="section-title animate__animated animate__fadeIn">Compétences Techniques</h2>
-      <div class="skills-grid">
-        <!-- Les compétences seront générées par JavaScript -->
+      <div class="section-header">
+        <span class="section-tag" data-i18n="about.tag">Qui suis-je ?</span>
+        <h2 class="section-title" data-i18n="about.title">À propos de moi</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p class="about-bio" data-i18n="about.bio">
+            Étudiant en Master Data Science et titulaire d'une Licence de technologie en ingénierie logicielle, je suis concepteur de solutions web robustes, développeur REST API, passionné par la qualité logicielle.
+          </p>
+          <div class="about-info-grid">
+            <div class="info-card">
+              <div class="info-icon"><i class="fas fa-birthday-cake"></i></div>
+              <div class="info-content">
+                <span class="info-label" data-i18n="about.birth">Date de naissance</span>
+                <span class="info-value">03 / 06 / 2002</span>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div class="info-content">
+                <span class="info-label" data-i18n="about.location">Localisation</span>
+                <span class="info-value">Douala, <span class="country" data-i18n="about.country">Cameroun</span></span>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-icon"><i class="fas fa-envelope"></i></div>
+              <div class="info-content">
+                <span class="info-label">Email</span>
+                <span class="info-value">karlsonkit87@gmail.com</span>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-icon"><i class="fas fa-phone"></i></div>
+              <div class="info-content">
+                <span class="info-label" class="tel" data-i18n="about.phone">Téléphone</span>
+                <span class="info-value">+237 693 745 998</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-languages reveal reveal--right">
+          <h3 class="languages-title" data-i18n="about.languages">Langues</h3>
+          <div class="lang-bars">
+            <div class="lang-item">
+              <div class="lang-info">
+                <span class="lang-name french" data-i18n="lang.french">Français</span>
+                <span class="lang-percent">90%</span>
+              </div>
+              <div class="lang-bar">
+                <div class="lang-fill" data-width="90"></div>
+              </div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-info">
+                <span class="lang-name english" data-i18n="lang.english">Anglais</span>
+                <span class="lang-percent">40%</span>
+              </div>
+              <div class="lang-bar">
+                <div class="lang-fill" data-width="40"></div>
+              </div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-info">
+                <span class="lang-name">Ngombale</span>
+                <span class="lang-percent">97%</span>
+              </div>
+              <div class="lang-bar">
+                <div class="lang-fill" data-width="97"></div>
+              </div>
+            </div>
+          </div>
+          <div class="education-box">
+            <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="edu-content">
+              <h4 data-i18n="about.education">Formation</h4>
+              <p>Master Data Science</p>
+              <p>Licence — Ingénierie Logicielle</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="experience" class="section experience">
+  <!-- Skills Section -->
+  <section id="skills" class="section section--alt">
     <div class="container">
-      <h2 class="section-title animate__animated animate__fadeIn">Expérience Professionnelle</h2>
+      <div class="section-header">
+        <span class="section-tag" data-i18n="skills.tag">Stack technique</span>
+        <h2 class="section-title" data-i18n="skills.title">Compétences Techniques</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-wrapper" id="skills-wrapper">
+        <!-- Generated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" data-i18n="exp.tag">Mon parcours</span>
+        <h2 class="section-title" data-i18n="exp.title">Expérience Professionnelle</h2>
+        <div class="section-line"></div>
+      </div>
       <div class="timeline">
-        <div class="timeline-item animate__animated animate__fadeInLeft">
-          <div class="timeline-date">Juil 2023 - Oct 2024</div>
-          <div class="timeline-content">
-            <h3>Abyster Consulting</h3>
-            <h4>Développeur Backend</h4>
-            <ul>
-              <li class="copilot">CopilotHRM: Analyse du système, mise en place de la base de données et implémentation
-                des APIs REST avec Spring Boot 3</li>
-              <li class="teleconsult">Téléconsultation: APIs REST pour application de consultation à distance avec
-                Laravel 9</li>
-              <li class="magnolia">Magnolia: APIs REST pour application de gestion des hôpitaux avec Laravel 9</li>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">
+            <i class="fas fa-calendar-alt"></i> Juil 2023 — Oct 2024
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-card-header">
+              <div class="company-info">
+                <h3 class="company-name">Abyster Consulting</h3>
+                <h4 class="company-role" data-i18n="exp.abyster.role">Développeur Backend</h4>
+              </div>
+              <span class="timeline-type timeline-type--pro" data-i18n="exp.type.pro">Stage</span>
+            </div>
+            <ul class="timeline-list">
+              <li class="copilot" data-i18n="exp.abyster.p1">
+                <span class="project-tag">CopilotHRM</span> Analyse du système, mise en place de la base de données et implémentation des APIs REST avec Spring Boot 3
+              </li>
+              <li class="teleconsult" data-i18n="exp.abyster.p2">
+                <span class="project-tag">Téléconsultation</span> APIs REST pour application de consultation à distance avec Laravel 9
+              </li>
+              <li class="magnolia" data-i18n="exp.abyster.p3">
+                <span class="project-tag">Magnolia</span> APIs REST pour application de gestion des hôpitaux avec Laravel 9
+              </li>
             </ul>
+            <div class="tech-tags">
+              <span class="tech-tag">Spring Boot 3</span>
+              <span class="tech-tag">Laravel 9</span>
+              <span class="tech-tag">REST API</span>
+              <span class="tech-tag">PostgreSQL</span>
+            </div>
           </div>
         </div>
-        <div class="timeline-item animate__animated animate__fadeInRight">
-          <div class="timeline-date">Oct 2024 - Fév 2025</div>
-          <div class="timeline-content">
-            <h3>JobFinder</h3>
-            <h4 class="projet-perso">Projet Personnel</h4>
-            <p class="projet-perso-descr">Application web de recherche de travail utilisant Spring Boot 3 et Angular 19
+
+        <div class="timeline-item timeline-item--right reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">
+            <i class="fas fa-calendar-alt"></i> Oct 2024 — Fév 2025
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-card-header">
+              <div class="company-info">
+                <h3 class="company-name">JobFinder</h3>
+                <h4 class="company-role projet-perso" data-i18n="exp.jobfinder.role">Projet Personnel</h4>
+              </div>
+              <span class="timeline-type timeline-type--personal" data-i18n="exp.type.personal">Personnel</span>
+            </div>
+            <p class="timeline-desc projet-perso-descr" data-i18n="exp.jobfinder.desc">
+              Application web de recherche de travail utilisant Spring Boot 3 et Angular 19
             </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Spring Boot 3</span>
+              <span class="tech-tag">Angular 19</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">MySQL</span>
+            </div>
           </div>
         </div>
-        <div class="timeline-item animate__animated animate__fadeInLeft">
-          <div class="timeline-date">Mar 2025 - Présent</div>
-          <div class="timeline-content">
-            <h3>Synthexis Sarl</h3>
-            <h4 class="syn-role">Développeur Web</h4>
-            <ul>
-              <li class="jtm">Développement et déploiement d'un site web utilisant Laravel 10</li>
-              <li class="mbc">Développement d'une application de gestion avec Spring boot 3 et Angular 19</li>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">
+            <i class="fas fa-calendar-alt"></i> Mar 2025 — <span data-i18n="exp.present">Présent</span>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-card-header">
+              <div class="company-info">
+                <h3 class="company-name">Synthexis Sarl</h3>
+                <h4 class="company-role syn-role" data-i18n="exp.synthexis.role">Développeur Web</h4>
+              </div>
+              <span class="timeline-type timeline-type--pro" data-i18n="exp.type.current">Actuel</span>
+            </div>
+            <ul class="timeline-list">
+              <li class="jtm" data-i18n="exp.synthexis.p1">
+                <span class="project-tag">JTM</span> Développement et déploiement d'un site web utilisant Laravel 10
+              </li>
+              <li class="mbc" data-i18n="exp.synthexis.p2">
+                <span class="project-tag">MBC</span> Développement d'une application de gestion avec Spring Boot 3 et Angular 19
+              </li>
             </ul>
+            <div class="tech-tags">
+              <span class="tech-tag">Laravel 10</span>
+              <span class="tech-tag">Spring Boot 3</span>
+              <span class="tech-tag">Angular 19</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="section contact">
+  <!-- Contact Section -->
+  <section id="contact" class="section section--alt">
     <div class="container">
-      <h2 class="section-title animate__animated animate__fadeIn">Contact</h2>
-      <div class="contact-content">
-        <div class="contact-info animate__animated animate__fadeInLeft">
-          <h3>Restons en contact</h3>
-          <p class="contact-text">N'hésitez pas à me contacter pour des opportunités ou collaborations.</p>
-          <div class="contact-details">
-            <p><i class="fas fa-envelope"></i> karlsonkit87@gmail.com</p>
-            <p><i class="fas fa-phone"></i> +237 693 745 998</p>
-            <p><i class="fas fa-map-marker-alt"></i> Douala, <span class="country">Cameroun</span></p>
+      <div class="section-header">
+        <span class="section-tag" data-i18n="contact.tag">Travaillons ensemble</span>
+        <h2 class="section-title" data-i18n="contact.title">Contact</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <h3 data-i18n="contact.stay">Restons en contact</h3>
+          <p class="contact-text" data-i18n="contact.desc">
+            N'hésitez pas à me contacter pour des opportunités ou collaborations.
+          </p>
+          <div class="contact-items">
+            <a href="mailto:karlsonkit87@gmail.com" class="contact-item">
+              <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+              <div class="contact-item-text">
+                <span class="contact-item-label">Email</span>
+                <span class="contact-item-value">karlsonkit87@gmail.com</span>
+              </div>
+            </a>
+            <a href="tel:+237693745998" class="contact-item">
+              <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+              <div class="contact-item-text">
+                <span class="contact-item-label" data-i18n="about.phone">Téléphone</span>
+                <span class="contact-item-value">+237 693 745 998</span>
+              </div>
+            </a>
+            <div class="contact-item">
+              <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div class="contact-item-text">
+                <span class="contact-item-label" data-i18n="about.location">Localisation</span>
+                <span class="contact-item-value">Douala, <span class="country" data-i18n="about.country">Cameroun</span></span>
+              </div>
+            </div>
           </div>
           <div class="social-links">
-            <a href="https://www.linkedin.com/in/karlson-kembou-2b1501328/" title="linkedin" target="_blank"><i
-                class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/kembouN" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://wa.me/237693745998" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="mailto:karlsonkit87@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/karlson-kembou-2b1501328/" target="_blank" class="social-btn" title="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/kembouN" target="_blank" class="social-btn" title="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://wa.me/237693745998" target="_blank" class="social-btn" title="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="mailto:karlsonkit87@gmail.com" class="social-btn" title="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
           </div>
         </div>
-        <form class="contact-form animate__animated animate__fadeInRight"
-          action="https://formsubmit.co/knk.towork@gmail.com">
-          <div class="form-group">
-            <input type="text" placeholder="Name*" id="contact-name" required>
+        <form class="contact-form reveal reveal--right" id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contact-name" data-i18n="form.name">Nom</label>
+              <input type="text" id="contact-name" placeholder="Votre nom" required>
+            </div>
+            <div class="form-group">
+              <label for="contact-email" data-i18n="form.email">Email</label>
+              <input type="email" id="contact-email" placeholder="votre@email.com" required>
+            </div>
           </div>
           <div class="form-group">
-            <input type="email" placeholder="Email*" id="contact-email" required>
+            <label for="contact-subject" data-i18n="form.subject">Sujet</label>
+            <input type="text" id="contact-subject" placeholder="Sujet du message">
           </div>
           <div class="form-group">
-            <input type="text" placeholder="Subject*" id="contact-subject">
+            <label for="contact-msg" data-i18n="form.message">Message</label>
+            <textarea id="contact-msg" placeholder="Votre message..." required></textarea>
           </div>
-          <div class="form-group">
-            <textarea placeholder="Message" required id="contact-msg"></textarea>
-          </div>
-          <button type="submit" class="btn">Envoyer le message</button>
-          <p class="feedback" id="submit-feedback"></p>
+          <button type="submit" class="btn btn--primary btn--full" id="submit-btn">
+            <i class="fas fa-paper-plane"></i>
+            <span data-i18n="form.send">Envoyer le message</span>
+          </button>
+          <p class="form-feedback" id="submit-feedback"></p>
         </form>
       </div>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Kembou Nimpa Karlson. <span class="droits">Tous droits réservés</span>.</p>
+    <div class="container footer-inner">
+      <a href="#home" class="footer-logo">
+        <span class="logo-bracket">&lt;</span>KNK<span class="logo-bracket">/&gt;</span>
+      </a>
+      <p class="footer-copy">
+        &copy; 2025 Kembou Nimpa Karlson. <span class="droits" data-i18n="footer.rights">Tous droits réservés</span>.
+      </p>
+      <div class="footer-social">
+        <a href="https://github.com/kembouN" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/karlson-kembou-2b1501328/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      </div>
     </div>
   </footer>
+
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="./js/script.js"></script>
 </body>
