@@ -645,6 +645,11 @@ body.light-mode .photo-badge {
   animation-delay: 4.5s;
 }
 .photo-badge--5 {
+  top: 37%;
+  left: -23%;
+  animation-delay: 6s;
+}
+.photo-badge--6 {
   bottom: 43%; right: -23%;
   animation-delay: 6s;
 }
@@ -844,6 +849,10 @@ body.light-mode .lang-bar { background: rgba(0,0,0,0.06); }
   font-size: 0.82rem;
   color: var(--text-secondary);
   line-height: 1.5;
+}
+
+.actual {
+  font-size: 0.5rem;
 }
 
 /* ---------- Skills ---------- */
