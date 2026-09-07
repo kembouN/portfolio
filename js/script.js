@@ -25,25 +25,42 @@ const SKILLS_DATA = {
     items: [
       { name: "MySQL",      icon: "fas fa-database",     level: 80 },
       { name: "PostgreSQL", icon: "fas fa-database",     level: 70 },
-      { name: "PgAdmin",    icon: "fas fa-table",        level: 60 },
+      { name: "MongoDB", icon: "fas fa-database",     level: 70 },
     ]
   },
   "Outils & Logiciels": {
     icon: "fas fa-tools",
     items: [
-      { name: "GitHub",     icon: "fab fa-github",       level: 80 },
-      { name: "GitLab",     icon: "fab fa-gitlab",       level: 80 },
-      { name: "Bitbucket",  icon: "fab fa-bitbucket",    level: 80 },
-      { name: "JIRA",       icon: "fab fa-jira",         level: 65 },
-      { name: "Trello",     icon: "fab fa-trello",       level: 85 },
       { name: "Postman",    icon: "fas fa-paper-plane",  level: 90 },
       { name: "Swagger",    icon: "fas fa-file-code",    level: 90 },
-      { name: "Docker",     icon: "fab fa-docker",       level: 60 },
       { name: "Maven",      icon: "fas fa-box",          level: 70 },
       { name:  "IA", icon: "fas fa-wand-magic-sparkles", level: 65},
       { name: "VS Code",        icon: "devicon-vscode-plain colored",   level: 90 },
       { name: "Intellij IDEA",  icon: "si si-intellijidea", level: 80 },
       { name: "Cursor",         icon: "si si-cursor",                   level: 90 }    ]
+  },
+  "DevOps": {
+    icon: "fas fa-cloud",
+    items: [
+      { name: "Docker",     icon: "fab fa-docker",       level: 60 },
+    ]
+  },
+  "Gestion de code": {
+    icon: "fab fa-git-alt",
+    items: [
+      { name: "GitHub",     icon: "fab fa-github",       level: 80 },
+      { name: "GitLab",     icon: "fab fa-gitlab",       level: 80 },
+      { name: "Bitbucket",  icon: "fab fa-bitbucket",    level: 80 },
+    ]
+  },
+  "Gestion de projet": {
+    icon: "fab fa-buffer",
+    items: [
+      { name: "JIRA",       icon: "fab fa-jira",         level: 65 },
+      { name: "Trello",     icon: "fab fa-trello",       level: 85 },
+      { name: "SharePoint", icon: "fab fa-microsoft",         level: 65 },
+      { name: "Confluence", icon: "fab fa-confluence",   level: 60 },
+    ]
   },
   "Modélisation": {
     icon: "fas fa-project-diagram",
@@ -101,19 +118,24 @@ const TRANSLATIONS = {
 
     "exp.tag":               "Mon parcours",
     "exp.title":             "Expérience Professionnelle",
-    "exp.type.pro":          "Stage",
+    "exp.type.pro":          "Stage pro",
+    "exp.type.cdi":          "CDI",
     "exp.type.personal":     "Personnel",
     "exp.type.current":      "Actuel",
     "exp.present":           "Présent",
-    "exp.abyster.role":      "Développeur Backend",
-    "exp.abyster.p1":        "Analyse du système, mise en place de la base de données et implémentation des APIs REST avec Spring Boot 3",
-    "exp.abyster.p2":        "APIs REST pour application de consultation à distance avec Laravel 9",
-    "exp.abyster.p3":        "APIs REST pour application de gestion des hôpitaux avec Laravel 9",
+    "exp.synthexis.date":    "Mar 2025 — Fév 2026",
+    "exp.synthexis.role":    "Développeur Web",
+    "exp.synthexis.p1":      '<span class="project-tag">JTM</span> Développement et déploiement d\'un site web religieux utilisant Laravel 10',
+    "exp.synthexis.p2":      '<span class="project-tag">Synthexis Formation</span> Développement et déploiement d\'un site web d\'e-learning utilisant Laravel 10',
+    "exp.synthexis.p3":      '<span class="project-tag">MBC</span> Développement d\'une application de gestion des clients et des commandes de l\'entreprise avec Spring Boot 3 et Angular 19',
+    "exp.jobfinder.date":    "Oct 2024 — Fév 2025",
     "exp.jobfinder.role":    "Projet Personnel",
     "exp.jobfinder.desc":    "Application web de recherche de travail utilisant Spring Boot 3 et Angular 19",
-    "exp.synthexis.role":    "Développeur Web",
-    "exp.synthexis.p1":      "Développement et déploiement d'un site web utilisant Laravel 10",
-    "exp.synthexis.p2":      "Développement d'une application de gestion avec Spring Boot 3 et Angular 19",
+    "exp.abyster.date":      "Juil 2023 — Oct 2024",
+    "exp.abyster.role":      "Développeur Backend",
+    "exp.abyster.p1":        '<span class="project-tag">CopilotHRM</span> Analyse du système, mise en place de la base de données et implémentation des APIs REST pour une application de gestion des ressources humaines avec Spring Boot 3',
+    "exp.abyster.p2":        '<span class="project-tag">Téléconsultation</span> APIs REST pour application médicale d\'e-consultation avec Laravel 9',
+    "exp.abyster.p3":        '<span class="project-tag">Magnolia</span> APIs REST pour application de gestion des hôpitaux avec Laravel 9',
 
     "contact.tag":    "Travaillons ensemble",
     "contact.title":  "Contact",
@@ -165,19 +187,24 @@ const TRANSLATIONS = {
 
     "exp.tag":               "My journey",
     "exp.title":             "Professional Experience",
-    "exp.type.pro":          "Internship",
+    "exp.type.pro":          "Professional internship",
+    "exp.type.cdi":          "Permanent contract",
     "exp.type.personal":     "Personal",
     "exp.type.current":      "Current",
     "exp.present":           "Present",
-    "exp.abyster.role":      "Backend Developer",
-    "exp.abyster.p1":        "System analysis, database setup and REST APIs implementation with Spring Boot 3",
-    "exp.abyster.p2":        "REST APIs for remote consultation application using Laravel 9",
-    "exp.abyster.p3":        "REST APIs for hospital management application using Laravel 9",
+    "exp.synthexis.date":    "Mar 2025 — Feb 2026",
+    "exp.synthexis.role":    "Web Developer",
+    "exp.synthexis.p1":      '<span class="project-tag">JTM</span> Development and deployment of a religious website using Laravel 10',
+    "exp.synthexis.p2":      '<span class="project-tag">Synthexis Formation</span> Development and deployment of an e-learning website using Laravel 10',
+    "exp.synthexis.p3":      '<span class="project-tag">MBC</span> Development of a client and order management application for the company using Spring Boot 3 and Angular 19',
+    "exp.jobfinder.date":    "Oct 2024 — Feb 2025",
     "exp.jobfinder.role":    "Personal Project",
     "exp.jobfinder.desc":    "Job search web application using Spring Boot 3 and Angular 19",
-    "exp.synthexis.role":    "Web Developer",
-    "exp.synthexis.p1":      "Development and deployment of a website using Laravel 10",
-    "exp.synthexis.p2":      "Development of a management application with Spring Boot 3 and Angular 19",
+    "exp.abyster.date":      "Jul 2023 — Oct 2024",
+    "exp.abyster.role":      "Backend Developer",
+    "exp.abyster.p1":        '<span class="project-tag">CopilotHRM</span> System analysis, database setup and REST APIs implementation for a human resources management application with Spring Boot 3',
+    "exp.abyster.p2":        '<span class="project-tag">Teleconsultation</span> REST APIs for a medical e-consultation application using Laravel 9',
+    "exp.abyster.p3":        '<span class="project-tag">Magnolia</span> REST APIs for a hospital management application using Laravel 9',
 
     "contact.tag":    "Let's work together",
     "contact.title":  "Contact",
@@ -219,7 +246,22 @@ document.addEventListener("DOMContentLoaded", () => {
   initSmoothScroll();
   initContactForm();
   initActiveNav();
+  applyAge();
 });
+
+function applyAge() {
+  const ageEl = document.querySelector(".info-value.age");
+  if (!ageEl) return;
+  const age = getAge();
+  ageEl.textContent = currentLang === "fr"
+    ? `${age} ans`
+    : `${age} years old`;
+}
+
+function getAge(fromDate = new Date()) {
+  let age = fromDate.getFullYear() - new Date("2002/01/01").getFullYear();
+  return age;
+}
 
 // ─── THEME ──────────────────────────────────────────
 function applyTheme(theme) {
@@ -249,7 +291,11 @@ function applyLang(lang) {
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     if (TRANSLATIONS[lang][key] !== undefined) {
-      el.textContent = TRANSLATIONS[lang][key];
+      if (el.hasAttribute("data-i18n-html")) {
+        el.innerHTML = TRANSLATIONS[lang][key];
+      } else {
+        el.textContent = TRANSLATIONS[lang][key];
+      }
     }
   });
 
@@ -260,6 +306,7 @@ function applyLang(lang) {
 
   // Update skill category titles if rendered
   updateSkillCategoryTitles(lang);
+  applyAge();
 }
 
 document.querySelectorAll(".lang-btn").forEach(btn => {

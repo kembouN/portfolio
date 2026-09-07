@@ -96,12 +96,12 @@
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
-            <span class="stat-num">10+</span>
+            <span class="stat-num">6+</span>
             <span class="stat-label" data-i18n="hero.stat2">projets réalisés</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
-            <span class="stat-num">3</span>
+            <span class="stat-num">2</span>
             <span class="stat-label" data-i18n="hero.stat3">entreprises</span>
           </div>
         </div>
@@ -126,6 +126,9 @@
             <i class="fas fa-bolt"></i> FastAPI
           </div>
           <div class="photo-badge photo-badge--5">
+            <i class="fab fa-python"></i> Python
+          </div>
+          <div class="photo-badge photo-badge--6">
             <i class="fab fa-react"></i> React
           </div>
         </div>
@@ -155,8 +158,8 @@
             <div class="info-card">
               <div class="info-icon"><i class="fas fa-birthday-cake"></i></div>
               <div class="info-content">
-                <span class="info-label" data-i18n="about.birth">Date de naissance</span>
-                <span class="info-value">03 / 06 / 2002</span>
+                <span class="info-label" data-i18n="about.birth">Age</span>
+                <span class="info-value age"></span>
               </div>
             </div>
             <div class="info-card">
@@ -177,7 +180,7 @@
               <div class="info-icon"><i class="fas fa-phone"></i></div>
               <div class="info-content">
                 <span class="info-label" class="tel" data-i18n="about.phone">Téléphone</span>
-                <span class="info-value">+237 693 745 998</span>
+                <span class="info-value">+237 693 745 998 / 671 340 629</span>
               </div>
             </div>
           </div>
@@ -188,28 +191,28 @@
             <div class="lang-item">
               <div class="lang-info">
                 <span class="lang-name french" data-i18n="lang.french">Français</span>
-                <span class="lang-percent">90%</span>
+                <span class="lang-percent">100%</span>
               </div>
               <div class="lang-bar">
-                <div class="lang-fill" data-width="90"></div>
+                <div class="lang-fill" data-width="100"></div>
               </div>
             </div>
             <div class="lang-item">
               <div class="lang-info">
                 <span class="lang-name english" data-i18n="lang.english">Anglais</span>
-                <span class="lang-percent">40%</span>
+                <span class="lang-percent">45%</span>
               </div>
               <div class="lang-bar">
-                <div class="lang-fill" data-width="40"></div>
+                <div class="lang-fill" data-width="45"></div>
               </div>
             </div>
             <div class="lang-item">
               <div class="lang-info">
                 <span class="lang-name">Ngombale</span>
-                <span class="lang-percent">97%</span>
+                <span class="lang-percent">50%</span>
               </div>
               <div class="lang-bar">
-                <div class="lang-fill" data-width="97"></div>
+                <div class="lang-fill" data-width="50"></div>
               </div>
             </div>
           </div>
@@ -217,7 +220,7 @@
             <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
             <div class="edu-content">
               <h4 data-i18n="about.education">Formation</h4>
-              <p>Master Data Science</p>
+              <p>Master Data Science <span class="actual">(En cours)</span></p>
               <p>Licence — Ingénierie Logicielle</p>
             </div>
           </div>
@@ -252,32 +255,35 @@
         <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-date">
-            <i class="fas fa-calendar-alt"></i> Juil 2023 — Oct 2024
+            <i class="fas fa-calendar-alt"></i> <span data-i18n="exp.synthexis.date">Mar 2025 — Fév 2026</span>
           </div>
           <div class="timeline-card">
             <div class="timeline-card-header">
               <div class="company-info">
-                <h3 class="company-name">Abyster Consulting</h3>
-                <h4 class="company-role" data-i18n="exp.abyster.role">Développeur Backend</h4>
+                <h3 class="company-name">Synthexis Sarl</h3>
+                <h4 class="company-role syn-role" data-i18n="exp.synthexis.role">Développeur Web</h4>
               </div>
-              <span class="timeline-type timeline-type--pro" data-i18n="exp.type.pro">Stage</span>
+              <span class="timeline-type timeline-type--pro" data-i18n="exp.type.cdi">CDI</span>
             </div>
             <ul class="timeline-list">
-              <li class="copilot" data-i18n="exp.abyster.p1">
-                <span class="project-tag">CopilotHRM</span> Analyse du système, mise en place de la base de données et implémentation des APIs REST avec Spring Boot 3
+              <li class="jtm" data-i18n="exp.synthexis.p1" data-i18n-html>
+                <span class="project-tag">JTM</span> Développement et déploiement d'un site web religieux utilisant Laravel 10
               </li>
-              <li class="teleconsult" data-i18n="exp.abyster.p2">
-                <span class="project-tag">Téléconsultation</span> APIs REST pour application de consultation à distance avec Laravel 9
+              <li class="sf" data-i18n="exp.synthexis.p2" data-i18n-html>
+                <span class="project-tag">Synthexis Formation</span> Développement et déploiement d'un site web d'e-learning utilisant Laravel 10
               </li>
-              <li class="magnolia" data-i18n="exp.abyster.p3">
-                <span class="project-tag">Magnolia</span> APIs REST pour application de gestion des hôpitaux avec Laravel 9
+              <li class="mbc" data-i18n="exp.synthexis.p3" data-i18n-html>
+                <span class="project-tag">MBC</span> Développement d'une application de gestion des clients et des commandes de l'entreprise avec Spring Boot 3 et Angular 19
               </li>
             </ul>
             <div class="tech-tags">
+              <span class="tech-tag">Laravel 10</span>
+              <span class="tech-tag">Fontawesome 6</span>
+              <span class="tech-tag">Bootstrap 5</span>
+              <span class="tech-tag">MySQL</span>
               <span class="tech-tag">Spring Boot 3</span>
-              <span class="tech-tag">Laravel 9</span>
-              <span class="tech-tag">REST API</span>
-              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Angular 19</span>
+              <span class="tech-tag">TypeScript</span>
             </div>
           </div>
         </div>
@@ -285,7 +291,7 @@
         <div class="timeline-item timeline-item--right reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-date">
-            <i class="fas fa-calendar-alt"></i> Oct 2024 — Fév 2025
+            <i class="fas fa-calendar-alt"></i> <span data-i18n="exp.jobfinder.date">Oct 2024 — Fév 2025</span>
           </div>
           <div class="timeline-card">
             <div class="timeline-card-header">
@@ -310,28 +316,38 @@
         <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-date">
-            <i class="fas fa-calendar-alt"></i> Mar 2025 — <span data-i18n="exp.present">Présent</span>
+            <i class="fas fa-calendar-alt"></i> <span data-i18n="exp.abyster.date">Juil 2023 — Oct 2024</span>
           </div>
           <div class="timeline-card">
             <div class="timeline-card-header">
               <div class="company-info">
-                <h3 class="company-name">Synthexis Sarl</h3>
-                <h4 class="company-role syn-role" data-i18n="exp.synthexis.role">Développeur Web</h4>
+                <h3 class="company-name">Abyster Consulting</h3>
+                <h4 class="company-role" data-i18n="exp.abyster.role">Développeur Backend</h4>
               </div>
-              <span class="timeline-type timeline-type--pro" data-i18n="exp.type.current">Actuel</span>
+              <span class="timeline-type timeline-type--pro" data-i18n="exp.type.pro">Stage pro</span>
             </div>
             <ul class="timeline-list">
-              <li class="jtm" data-i18n="exp.synthexis.p1">
-                <span class="project-tag">JTM</span> Développement et déploiement d'un site web utilisant Laravel 10
+              <li class="copilot" data-i18n="exp.abyster.p1" data-i18n-html>
+                <span class="project-tag">CopilotHRM</span> Analyse du système, mise en place de la base de données et implémentation des APIs REST pour une application de gestion des ressources humaines avec Spring Boot 3
               </li>
-              <li class="mbc" data-i18n="exp.synthexis.p2">
-                <span class="project-tag">MBC</span> Développement d'une application de gestion avec Spring Boot 3 et Angular 19
+              <li class="teleconsult" data-i18n="exp.abyster.p2" data-i18n-html>
+                <span class="project-tag">Téléconsultation</span> APIs REST pour application médicale d'e-consultation avec Laravel 9
+              </li>
+              <li class="magnolia" data-i18n="exp.abyster.p3" data-i18n-html>
+                <span class="project-tag">Magnolia</span> APIs REST pour application de gestion des hôpitaux avec Laravel 9
               </li>
             </ul>
             <div class="tech-tags">
-              <span class="tech-tag">Laravel 10</span>
               <span class="tech-tag">Spring Boot 3</span>
-              <span class="tech-tag">Angular 19</span>
+              <span class="tech-tag">Laravel 9</span>
+              <span class="tech-tag">REST API</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag">Bitbucket</span>
+              <span class="tech-tag">Jira</span>
+              <span class="tech-tag">Trello</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">GitLab</span>
             </div>
           </div>
         </div>
@@ -427,7 +443,7 @@
         <span class="logo-bracket">&lt;</span>KNK<span class="logo-bracket">/&gt;</span>
       </a>
       <p class="footer-copy">
-        &copy; 2025 Kembou Nimpa Karlson. <span class="droits" data-i18n="footer.rights">Tous droits réservés</span>.
+        &copy; 2026 Kembou Nimpa Karlson. <span class="droits" data-i18n="footer.rights">Tous droits réservés</span>.
       </p>
       <div class="footer-social">
         <a href="https://github.com/kembouN" target="_blank"><i class="fab fa-github"></i></a>
